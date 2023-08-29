@@ -1,0 +1,49 @@
+.barchart-container {
+    width: 100%; /* Set the container width to 100% to fill its parent */
+    max-width: 600px; /* Set a maximum width to limit the chart's size on larger screens */
+    margin: 0 auto; /* Center the container horizontally */
+  }
+  
+  /* Make the chart responsive using media queries */
+  @media (max-width: 767px) {
+    .barchart-container {
+      max-width: 100%; /* Set the maximum width to 100% on smaller screens */
+    }
+   
+  }
+.blank{
+  margin-top: 100px;
+}
+.table_data{
+  margin-left: 27%;
+}
+@media (max-width:700px){
+  .table_data{
+    margin-left: -2%;
+  }
+}
+.congo{
+  display: flex;
+  justify-content:center;
+  align-items: center;
+}
+.congo img{
+  width: 100px;
+  height: 80px;
+}
+.congo h3{
+  color:green;
+}
+.section-title{
+  margin-top: 50px;
+  margin-bottom: -20px;
+}
+.back_photo{
+  /* background-color: #DAF5FF; */
+}
+
+/* .back_photo{
+  background: url("../../img/images/hero-bg.png");
+  margin: 0;
+  padding: 0;
+} */
