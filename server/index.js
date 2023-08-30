@@ -20,14 +20,14 @@ Connection();
 
 const app=express();
 
-// app.use(cors({
-//     credentials: true,
-//     origin: "https://www.dhruvhealth.com"
-//   }));
 app.use(cors({
     credentials: true,
-    origin: "http://localhost:3000"
+    origin: "https://www.culturals@iitb.onrender.com"
   }));
+// app.use(cors({
+//     credentials: true,
+//     origin: "http://localhost:3000"
+//   }));
 
 app.use(express.json());
 app.use(express.static(path.join(__dirname,"build")));
@@ -35,12 +35,7 @@ app.use(express.static(path.join(__dirname,"build")));
 app.use("/api/clients",clientRoutes);
 app.use("/api/login",authRoutes);
 app.use("/api/messages",messageRoutes);
-
-app.use("/api/tests",testRoutes);
-app.use("/api/packages",packageRoutes);
-app.use("/api/payments",paymentRoutes);
 app.use("/api/queries",QueryRoutes)
-
 app.use("/api/blog",blogRoutes);
 app.use("/api/GC",GCpoints);
 
