@@ -116,28 +116,14 @@ const App = () => {
 					isAdmin={user && user.isAdmin}
 					/>
 				<PrivateRoute exact user={user && user.isClient} path="/clientHome" component={Home}/>
-				<PrivateRoute exact user={user&& user.isClient} path="/clientDataEntry/NewSample" component={NewSample} /> 
-				<PrivateRoute exact user={user && user.isClient} path="/client/DataEntry/Add_Ons" component={AddOns}/>
-				<PrivateRoute exact user={user && user.isClient} path="/client/DataEntry/RepeatSample" component={RepeatSample}/>
-				<PrivateRoute exact user={user && user.isClient} path="/client/PatientReports/NewReports" component={NewReports} /> 
-				<PrivateRoute exact user={user && user.isClient} path="/client/PatientReports/HistoricalReports" component={HistoricalReports} />
-				<PrivateRoute exact user={user && user.isClient} path="/client/Billing/AmountDeposit" component={PaymentClient}/> 
-				<PrivateRoute exact user={user && user.isClient} path="/client/Billing/CostOfSamples" component={CostOfSamples}/>
-				<PrivateRoute exact user={user && user.isClient} path="/client/Billing/transactionDetails" component={TransactionDetails}/>
-				<PrivateRoute exact user={user&& user.isClient} path="/client/SampleTracking/TrackSample" component={TrackSample}/>
-				<PrivateRoute exact user={user && user.isClient} path ="/client/MyAccount/PriceList" component={PriceList}/>
-				<PrivateRoute exact user={user && user.isClient} path="/client/Profile/Edit" component={Profile}/>
-				<PrivateRoute exact user={user && user.isClient} path="/client/query" component={Query}/>
+				
 				
 				<PrivateRoute exact user={user} isAdmin={user && user.isAdmin} path="/adminHome" component={AdminHome} />
 				<PrivateRoute exact user={user} isAdmin={user && user.isAdmin} path="/admin/ClientBookings/Pending" component={Pending} />
 				<PrivateRoute exact user={user} isAdmin={user && user.isAdmin} path="/admin/ClientBookings/SuccessFull" component={SuccessFull} />
 				<PrivateRoute exact user={user} isAdmin={user && user.isAdmin} path="/admin/ClientBookings/Rejected" component={Rejected} />
 				<PrivateRoute exact user={user} isAdmin={user && user.isAdmin} path="/admin/GCPoints" component={GCPoints} />
-				<PrivateRoute exact user={user} isAdmin={user && user.isAdmin} path="/admin/AllClients/ClientsTransactions" component={ClientsTransactions} />
-				<PrivateRoute exact user={user} isAdmin={user && user.isAdmin} path="/admin/DirectPatient/Pending" component={DirectPatientPending}/>
-				<PrivateRoute exact user={user} isAdmin={user && user.isAdmin} path="/admin/DirectPatient/Rejected" component={DirectPatientRejected} />
-				<PrivateRoute exact user={user} isAdmin={user && user.isAdmin} path="/admin/DirectPatient/Success" component={DirectPatientSuccess} />
+				
 				<PrivateRoute exact user={user} isAdmin={user && user.isAdmin} path="/admin/MyAccount/editProfile" component={AdminProfile} />
 				<PrivateRoute exact user={user} isAdmin={user && user.isAdmin} path="/admin/MyAccount/PriceList" component={AdminPriceList} />
 				<PrivateRoute exact user={user} isAdmin={user && user.isAdmin} path="/admin/queries" component={Queries}/>
