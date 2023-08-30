@@ -2,9 +2,9 @@ import React, { useEffect, useState } from 'react';
 import Navbar from "../../components/Navbar";
 import "./style.css";
 import Sidebar from "../../components/Sidebar";
-import AppRoutes from "../../AppRoutes";
+
 import { useDispatch, useSelector } from "react-redux";
-import logo from "../../img/images/logo.jpg";
+import logo from "../../img/images/ICClogo.png";
 
 
 const ClientDashboard = () => {
@@ -47,9 +47,9 @@ const ClientDashboard = () => {
             <div className={`sidebar_container ${isSidebarOpen ? "open" : ""}`}>
               <Sidebar onClick={handleSidebarClick} />
             </div>
-            <div className={`client_area mobile ${isSidebarOpen ? "sidebar-open" : ""}`}>
+            {/* <div className={`client_area mobile ${isSidebarOpen ? "sidebar-open" : ""}`}>
               <AppRoutes />
-            </div>
+            </div> */}
             <div className="toggle_button" onClick={handleToggleSidebar}>
               <i className="bi bi-border-width"></i>
             </div>
@@ -59,9 +59,9 @@ const ClientDashboard = () => {
             <div className="sidebar_container open">
               <Sidebar onClick={handleSidebarClick} />
             </div>
-            <div className="client_area">
+            {/* <div className="client_area">
               <AppRoutes />
-            </div>
+            </div> */}
           </>
         )}
       </div>

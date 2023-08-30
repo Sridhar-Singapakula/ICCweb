@@ -4,7 +4,7 @@ import  "./style.css"
 import SidebarAdmin from "../../components/SidebarAdmin"
 import AdminRoutes from "../../AdminRoutes"
 import { useSelector } from "react-redux";
-import logo from "../../img/images/logo.jpg";
+import logo from "../../img/images/ICClogo.png";
 
 const ClientDashboard = () => {
 

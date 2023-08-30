@@ -3,7 +3,7 @@ import { NavLink,useHistory, Link} from "react-router-dom";
 import { useSelector } from "react-redux";
 import { ClickAwayListener } from "@mui/material";
 import "./style.css"
-import logo from "../../img/images/logo.png"
+import logo from "../../img/images/ICClogo.png"
 import SearchIcon from "@mui/icons-material/Search";
 
 import styles from "./styles.module.scss";

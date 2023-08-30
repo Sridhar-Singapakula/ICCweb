@@ -7,11 +7,8 @@ import {useDispatch} from "react-redux";
 import Slider from 'react-slick';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
-import image11 from "../../img/images/11.jpg"
-import { image1, image2,image3,phlebotomist,testTubes,biochemistry2,microbiology4,biochemistry,microscope,serology2,microbilogy3,tree,image4,image5,image7,image8,image9,molecularbiology,microbiology,serology,LabArea,reception ,Accounts,microbiology2, molecularbiology2 } from "../../img/imgPaths"
 import 'aos/dist/aos.css';
 import TextField from "../../components/Inputs/TextField";
-import NABL from "../../img/images/NABL.png"
 
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap-icons/font/bootstrap-icons.css';
@@ -23,18 +20,6 @@ import 'swiper/swiper-bundle.min.css';
 import './style.css';
 
 
-import pathology from "../../img/images/pathology.jpg"
-import Xray from "../../img/images/DigitalXray.jpg"
-import ECG from "../../img/images/ECG.jpg"
-import TMT from "../../img/images/treadmill.jpg"
-import Sono from "../../img/images/Sono.jpg"
-import PFT from "../../img/images/PFT.jpg"
-import eye from "../../img/images/eyeclinic.png"
-import dental from "../../img/images/dental.png"
-import wellness from "../../img/images/wellness.jpg"
-import consultation from "../../img/images/consultation.jpg"
-import ibreast from "../../img/images/ibreast.jpg"
-import poly from "../../img/images/poly.jpg"
 import { Query } from '../../redux/userSlice/apiCalls';
 
 
