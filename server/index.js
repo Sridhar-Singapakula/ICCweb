@@ -20,14 +20,14 @@ Connection();
 
 const app=express();
 
-// app.use(cors({
-//     credentials: true,
-//     origin: "https://www.culturalsatiitb.onrender.com"
-//   }));
 app.use(cors({
     credentials: true,
-    origin: "http://localhost:3000"
+    origin: "https://www.culturalsatiitb.onrender.com"
   }));
+// app.use(cors({
+//     credentials: true,
+//     origin: "http://localhost:3000"
+//   }));
 
 app.use(express.json());
 app.use(express.static(path.join(__dirname,"build")));
