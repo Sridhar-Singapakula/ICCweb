@@ -22,7 +22,7 @@ const app=express();
 
 app.use(cors({
     credentials: true,
-    origin: "https://www.culturals@iitb.onrender.com"
+    origin: "https://www.culturalsatiitb.onrender.com"
   }));
 // app.use(cors({
 //     credentials: true,
