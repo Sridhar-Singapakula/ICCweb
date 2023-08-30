@@ -5,13 +5,10 @@ const Connection=require("./db");
 const clientRoutes=require("./routes/client")
 const authRoutes=require("./routes/clientAuth")
 const messageRoutes =require("./routes/messages")
-const patientRoutes =require("./routes/patient")
+
 const testRoutes = require("./routes/tests")
 const packageRoutes =require("./routes/package")
-const paymentRoutes = require("./routes/payment")
 const QueryRoutes = require("./routes/queries")
-const clientsTransactionsRoutes=require("./routes/clientsTransactions")
-const directPatientRoutes = require("./routes/DirectPatient")
 const blogRoutes=require("./routes/blog");
 const GCpoints=require('./routes/GC');
 const path=require("path");
@@ -38,13 +35,12 @@ app.use(express.static(path.join(__dirname,"build")));
 app.use("/api/clients",clientRoutes);
 app.use("/api/login",authRoutes);
 app.use("/api/messages",messageRoutes);
-app.use("/api/client/patients",patientRoutes);
+
 app.use("/api/tests",testRoutes);
 app.use("/api/packages",packageRoutes);
 app.use("/api/payments",paymentRoutes);
 app.use("/api/queries",QueryRoutes)
-app.use("/api/clientsTransactions",clientsTransactionsRoutes)
-app.use("/api/directPatient",directPatientRoutes);
+
 app.use("/api/blog",blogRoutes);
 app.use("/api/GC",GCpoints);
 
