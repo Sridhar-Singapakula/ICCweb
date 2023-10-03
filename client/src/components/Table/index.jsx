@@ -3,50 +3,24 @@ import "./style.css"
 
 const Table = ({ data, columns, pageLimit }) => {
   const [currentPage, setCurrentPage] = useState(1);
-  const [searchFilters, setSearchFilters] = useState({});
-  
-  const filteredData = data.filter(item => {
-    for (const key in searchFilters) {
-      const searchValue = searchFilters[key].toLowerCase();
-      const itemValue = String(item[key]).toLowerCase();
-      if (itemValue.indexOf(searchValue) === -1) {
-        return false;
-      }
-    }
-    return true;
-  });
-  
-  const pageCount = Math.ceil(filteredData.length / pageLimit);
+
+  const pageCount = Math.ceil(data.length / pageLimit);
   const startIndex = (currentPage - 1) * pageLimit;
   const endIndex = startIndex + pageLimit;
-  const currentData = filteredData.slice(startIndex, endIndex);
+  const currentData = data.slice(startIndex, endIndex);
   
   const handlePageChange = (page) => {
     setCurrentPage(page);
   };
   
-  const handleSearchChange = (event, column) => {
-    const { value } = event.target;
-    setSearchFilters(prevFilters => ({
-      ...prevFilters,
-      [column]: value
-    }));
-  };
-  
   return (
     <div className='AAp'>
-      <table>
+      <table className='tb_'>
         <thead>
           <tr>
-            {columns.map(column => (
-              <th key={column}>
-                <input
-                  type="text"
-                  value={searchFilters[column] || ''}
-                  onChange={(event) => handleSearchChange(event, column)}
-                  placeholder={`Search ${column}`}
-                  className='search'
-                />
+            {columns.map((column, index) => (
+              <th key={index} style={{ width: "270px" }}>
+                {column}
               </th>
             ))}
           </tr>
@@ -54,8 +28,8 @@ const Table = ({ data, columns, pageLimit }) => {
         <tbody>
           {currentData.map((item, index) => (
             <tr key={index}>
-              {columns.map(column => (
-                <td key={column}>{item[column]}</td>
+              {columns.map((column, columnIndex) => (
+                <td key={columnIndex}>{item[column]}</td>
               ))}
             </tr>
           ))}

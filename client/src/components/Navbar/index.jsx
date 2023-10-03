@@ -2,7 +2,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useHistory, Link } from "react-router-dom";
 import AOS from 'aos';
 import { useEffect,useState } from 'react';
-import ICClogo from "../../img/images/ICClogo.png"
+import ICClogo from "../../img/images/ICClogo.png";
 
 
 const Navbar = () => {
@@ -42,7 +42,7 @@ const Navbar = () => {
           <ul>
             <li onClick={handleNavLinkClick}><a className="nav-link scrollto active" href="/">Home</a></li>
             <li onClick={handleNavLinkClick}><a className="nav-link scrollto" href="/GC">GC</a></li>
-            <li onClick={handleNavLinkClick}><a className="nav-link scrollto" href="#services">Explore</a></li>
+            <li onClick={handleNavLinkClick}><a className="nav-link scrollto" href="#services">Clubs</a></li>
             
             <li onClick={handleNavLinkClick} >
               <a href="/team">

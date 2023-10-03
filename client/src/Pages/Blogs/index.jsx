@@ -5,7 +5,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap-icons/font/bootstrap-icons.css';
 import axios from "axios";
 import AOS from 'aos';
-import logo from "../../img/images/ICClogo.png"
+import logo from "../../img/images/logo.jpg"
 import "./style.css"
 import BlogPop from "../BlogPop"
 import Navbar from '../../components/Navbar';

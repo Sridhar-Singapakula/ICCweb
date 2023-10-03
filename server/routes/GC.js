@@ -53,10 +53,10 @@ router.put('/:id', [validateObjectId, admin], async (req, res) => {
       hostel.hostelName = hostelName;
     }
     if (totalGCpoints) {
-      hostel.totalGCpoints = totalGCpoints;
+      hostel.totalGCpoints =hostel.totalGCpoints ;
     }
     if (numberOfGold) {
-      hostel.numberOfGold = numberOfGold;
+      hostel.numberOfGold = hostel.numberOfGold ;
     }
 
     // Save the updated hostel
@@ -74,9 +74,9 @@ router.put('/:id', [validateObjectId, admin], async (req, res) => {
 router.post('/:id/add-points', [validateObjectId, admin], async (req, res) => {
   try {
     const { id } = req.params;
-    const { points } = req.body;
+    const { points} = req.body;
 
-    if (!points || typeof points !== 'number' || points <= 0) {
+    if (!points || typeof points !== 'number') {
       return res.status(400).send({ message: 'Invalid points value' });
     }
 
@@ -87,6 +87,7 @@ router.post('/:id/add-points', [validateObjectId, admin], async (req, res) => {
 
     // Add points to the existing totalGCpoints
     hostel.totalGCpoints += points;
+    // hostel.numberOfGold  +=numberOfGold;
 
     // Save the updated hostel
     await hostel.save();

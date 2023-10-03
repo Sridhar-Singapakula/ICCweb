@@ -36,6 +36,23 @@ import film from "../../../src/img/images/film.png";
 import comedy from "../../../src/img/images/comedy.jfif";
 import fashion from "../../../src/img/images/fashion.png";
 import main from "../../../src/img/images/main.png";
+import RootsLogo from "../../../src/img/images/Roots_black.png";
+import FourthWallClub from "../../../src/img/images/FourthWallClub.png";
+import SymphonyClub from "../../../src/img/images/SymphonyClub.png";
+import InSyncClub from "../../../src/img/images/InSyncClub.png";
+import SilverScreenClub from "../../../src/img/images/SilverScreenClub.png";
+import ComedyConsClub from "../../../src/img/images/ComedyConsClub.png";
+import VaaniClub from "../../../src/img/images/VaaniClub.png";
+import StyleUpClub from "../../../src/img/images/StyleUpClub.png";
+import WeSpeakClub from "../../../src/img/images/WeSpeakClub.png";
+import DesignClub from "../../../src/img/images/DesignClub.png";
+import PixelsClub from "../../../src/img/images/PixelsClub.png";
+import LiteratiClub from "../../../src/img/images/LiteratiClub.png";
+
+
+
+
+
 
 
 const Main = () => {
@@ -172,40 +189,6 @@ const Main = () => {
        
       </div>
     </section>
-    <section id="AboutUs" className="about section-bg">
-        <div className="container" data-aos="fade-up">
-            <div className="row no-gutters">
-            
-            <div className="col-xl-7 d-flex align-items-stretch">
-                <div className="icon-boxes d-flex flex-column justify-content-center">
-                <div className="row">
-                    <div className="col-md-6 icon-box" data-aos="fade-up" data-aos-delay="100">
-                    <i class="bi bi-bookmark-check-fill" style={{color:"green"}}></i>
-                    <h4>Vision and Mission</h4>
-                    <p> Our vision is to cultivate a vibrant cultural community that transcends boundaries and nurtures creative expression. We are committed to fostering diversity, igniting passions, and fostering a culture of artistic exploration, enriching every member's journey at IIT Bombay.</p>
-                    </div>
-                    <div className="col-md-6 icon-box" data-aos="fade-up" data-aos-delay="200">
-                    <i class="bi bi-diagram-3-fill" style={{color:"lightblue"}}></i>
-                    <h4>Our Team</h4>
-                    <p>Curators of Culture, Architects of Inspiration - Our team comprises dedicated individuals united by a common passion for the arts. Together, we curate enriching experiences, promote artistic collaboration, and create a platform for talents to flourish. Join us in shaping the cultural tapestry of IIT Bombay</p>
-                    </div>
-                    <div className="col-md-6 icon-box" data-aos="fade-up" data-aos-delay="300">
-                    <i class="bi bi-list-check" style={{color:"yellow"}}></i>
-                    <h4>Events</h4>
-                    <p>Where Art Comes to Life - Our events are vibrant celebrations of artistic brilliance. From captivating performances to thought-provoking exhibitions, we offer a diverse range of experiences that inspire, entertain, and unite the IIT Bombay community</p>
-                    </div>
-                    <div className="col-md-6 icon-box" data-aos="fade-up" data-aos-delay="400">
-                    <i class="bi bi-reception-4"></i>
-                    <h4>Management</h4>
-                    <p>Guiding Creativity, Nurturing Dreams - Our management embodies the spirit of effective leadership and unwavering support for cultural endeavors. With a commitment to excellence, we steer the course, provide resources, and create an environment where cultural aspirations transform into reality</p>
-                    </div>
-                </div>
-                
-                </div>
-            </div>
-            </div>
-        </div>
-    </section>
     <section id="services" className="services section-bg ">
       <div className="container" data-aos="fade-up">
 
@@ -217,95 +200,166 @@ const Main = () => {
         <div className="row">
         
           <div className="col-md-6">
-            <Link to="/roots">
+          
           <div class="blob"></div>
-            <div className="icon-box" data-aos="fade-up" data-aos-delay="100">
-              <i className="bi bi-briefcase" style={{color:"green"}}></i>
-              <h4>Roots Club<a href="/"></a></h4>
-              <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Error asperiores animi  </p>
+          <a href="/roots">
+            <div className="icon-box" data-aos="fade-up" data-aos-delay="100" style={{display:"flex"}}>
+              <div className="logo_desc" >
+                <img src={RootsLogo} className="logo_img"></img>
+              </div>
+              <div>
+              <h4>Roots Club<a href=""></a></h4>
+              <p>The Classical and Folk Arts Club of IIT Bombay </p>
+              </div>
+              
             </div>
-            </Link>
+            </a>
           </div>
           <div className="col-md-6 mt-4 mt-md-0">
-            <div className="icon-box" data-aos="fade-up" data-aos-delay="200">
-              <i className="bi bi-card-checklist" style={{color:"lightblue"}}></i>
-              <h4>Vaani<a href="/"></a></h4>
-              <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Error asperiores animi  </p>
+          <a href="/fourthwall">
+            <div className="icon-box" data-aos="fade-up" data-aos-delay="100" style={{display:"flex"}}>
+              <div className="logo_desc" >
+                <img src={FourthWallClub} className="logo_img"></img>
+              </div>
+              <div>
+              <h4>FourthWall <a href=""></a></h4>
+              <p>The Dramatics Club of IIT Bombay </p>
+              </div>
             </div>
+            </a>
           </div>
           <div className="col-md-6 mt-4 mt-md-0">
-            <div className="icon-box" data-aos="fade-up" data-aos-delay="300">
-              <i className="bi bi-bar-chart" style={{color:"yellow"}}></i>
-              <h4>Symphony<a href="/"></a></h4>
-              <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Error asperiores animi  </p>
+          <a href="/insync">
+            <div className="icon-box" data-aos="fade-up" data-aos-delay="100" style={{display:"flex"}}>
+              <div className="logo_desc" >
+                <img src={InSyncClub} className="logo_img"></img>
+              </div>
+              <div>
+              <h4>InSync <a href=""></a></h4>
+              <p>The Dance Club of IIT Bombay</p>
+              </div>
             </div>
+            </a>
           </div>
           <div className="col-md-6 mt-4 mt-md-0">
-            <div className="icon-box" data-aos="fade-up" data-aos-delay="400">
-              <i className="bi bi-binoculars" style={{color:"pink"}}></i>
-              <h4>Literati<a href="/"></a></h4>
-              <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Error asperiores animi  </p>
+          <a href="/symphony">
+            <div className="icon-box" data-aos="fade-up" data-aos-delay="100" style={{display:"flex"}}>
+              <div className="logo_desc" >
+                <img src={SymphonyClub} className="logo_img" ></img>
+              </div>
+              <div>
+              <h4>Symphony<a href=""></a></h4>
+              <p>The Music Club of IIT Bombay </p>
+              </div>
             </div>
+            </a>
           </div>
           <div className="col-md-6 mt-4 mt-md-0">
-            <div className="icon-box" data-aos="fade-up" data-aos-delay="500">
-              <i className="bi bi-brightness-high" style={{color:"grey"}}></i>
-              <h4>The Design Club<a href="/"></a></h4>
-              <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Error asperiores animi  </p>
+          <a href="/wespeak">
+            <div className="icon-box" data-aos="fade-up" data-aos-delay="100" style={{display:"flex"}}>
+              <div className="logo_desc" >
+                <img src={WeSpeakClub} className="logo_img" ></img>
+              </div>
+              <div>
+              <h4>WeSpeak <a href=""></a></h4>
+              <p>The Debating Club of IIT Bombay </p>
+              </div>
             </div>
+            </a>
           </div>
           <div className="col-md-6 mt-4 mt-md-0">
-            <div className="icon-box" data-aos="fade-up" data-aos-delay="600">
-              <i className="bi bi-calendar4-week" style={{color:"orange"}}></i>
-              <h4>InSync<a href="/"></a></h4>
-              <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Error asperiores animi  </p>
+          <a href="/comedycons">
+            <div className="icon-box" data-aos="fade-up" data-aos-delay="100" style={{display:"flex"}}>
+              <div className="logo_desc" >
+                <img src={ComedyConsClub} className="logo_img" style={{width:"120%"}}></img>
+              </div>
+              <div>
+              <h4>ComedyCons<a href=""></a></h4>
+              <p>The Comedy Club of IIT Bombay</p>
+              </div>
             </div>
-          </div>
-          <div className="col-md-6 mt-4 mt-md-0">
-            <div className="icon-box" data-aos="fade-up" data-aos-delay="600">
-              <i className="bi bi-card-checklist" style={{color:"red"}}></i>
-              <h4>RANG & Pixels<a href="/"></a></h4>
-              <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Error asperiores animi  </p>
-            </div>
+            </a>
             
           </div>
           <div className="col-md-6 mt-4 mt-md-0">
-            <div className="icon-box" data-aos="fade-up" data-aos-delay="600">
-              <i className="bi bi-card-checklist" style={{color:"red"}}></i>
-              <h4>StyleUp<a href="/"></a></h4>
-              <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Error asperiores animi  </p>
+          <a href="/styleup">
+            <div className="icon-box" data-aos="fade-up" data-aos-delay="100" style={{display:"flex"}}>
+              <div className="logo_desc" >
+                <img src={StyleUpClub} className="logo_img"></img>
+              </div>
+              <div>
+              <h4>StyleUp <a href=""></a></h4>
+              <p>The Fashion Club of IIT Bombay </p>
+              </div>
             </div>
-            
+            </a>
           </div>
           <div className="col-md-6 mt-4 mt-md-0">
-            <div className="icon-box" data-aos="fade-up" data-aos-delay="200">
-              <i className="bi bi-card-checklist" style={{color:"lightblue"}}></i>
-              <h4>Silver Screen<a href="/"></a></h4>
-              <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Error asperiores animi  </p>
+          <a href="/literati">
+            <div className="icon-box" data-aos="fade-up" data-aos-delay="100" style={{display:"flex"}}>
+              <div className="logo_desc" >
+                <img src={LiteratiClub} className="logo_img"></img>
+              </div>
+              <div>
+              <h4>Literati <a href=""></a></h4>
+              <p>The Literary Arts Club of IIT Bombay</p>
+              </div>
             </div>
+            </a>
           </div>
           <div className="col-md-6">
-            <div className="icon-box" data-aos="fade-up" data-aos-delay="100">
-              <i className="bi bi-briefcase" style={{color:"green"}}></i>
-              <h4>Fourthwall<a href="/"></a></h4>
-              <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Error asperiores animi  </p>
+          <a href="/vaani">
+            <div className="icon-box" data-aos="fade-up" data-aos-delay="100" style={{display:"flex"}}>
+              <div className="logo_desc" >
+                <img src={VaaniClub} className="logo_img"></img>
+              </div>
+              <div>
+              <h4>Vaani  <a href=""></a></h4>
+              <p>The Indian Languages Club of IIT Bombay </p>
+              </div>
             </div>
+            </a>
           </div>
           <div className="col-md-6 mt-4 mt-md-0">
-            <div className="icon-box" data-aos="fade-up" data-aos-delay="600">
-              <i className="bi bi-briefcase" style={{color:"pink"}}></i>
-              <h4>Comedy Cons<a href="/"></a></h4>
-              <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Error asperiores animi  </p>
+          <a href="/pixels">
+            <div className="icon-box" data-aos="fade-up" data-aos-delay="100" style={{display:"flex"}}>
+              <div className="logo_desc" >
+                <img src={PixelsClub} className="logo_img"></img>
+              </div>
+              <div>
+              <h4>Rang & Pixels<a href=""></a></h4>
+              <p>The Photography and Fine Arts Club of IIT Bombay</p>
+              </div>
             </div>
+            </a>
           </div>
           <div className="col-md-6 mt-4 mt-md-0">
-            <div className="icon-box" data-aos="fade-up" data-aos-delay="600">
-              <i className="bi bi-card-checklist" style={{color:"red"}}></i>
-              <h4>We Speak<a href="/"></a></h4>
-              <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Error asperiores animi  </p>
+          <a href="/silverscreen">
+            <div className="icon-box" data-aos="fade-up" data-aos-delay="100" style={{display:"flex"}}>
+              <div className="logo_desc" >
+                <img src={SilverScreenClub} className="logo_img"></img>
+              </div>
+              <div>
+              <h4>SilverScreen <a href=""></a></h4>
+              <p>The Film and Media Club of IIT Bombay</p>
+              </div>
             </div>
-            
+            </a>
           </div>
+          <div className="col-md-6 mt-4 mt-md-0">
+          <a href="/design">
+            <div className="icon-box" data-aos="fade-up" data-aos-delay="100" style={{display:"flex"}}>
+              <div className="logo_desc" >
+                <img src={DesignClub} className="logo_img" ></img>
+              </div>
+              <div>
+              <h4>The Design Club<a href=""></a></h4>
+              <p> Design Club of IIT Bombay</p>
+              </div>
+            </div>
+            </a>
+          </div>
+         
         </div>
 
       </div>
@@ -401,7 +455,7 @@ const Main = () => {
     </section>
 
   </div>
-  <footer id="footer" className="footer">
+  <footer id="footer2" className="footer">
       
 
       <div className="footer-top">
@@ -436,7 +490,7 @@ const Main = () => {
         </div>
       </div>
     </footer>
-  <a href="/" className="back-to-top d-flex align-items-center justify-content-center"><i className="bi bi-arrow-up-short"></i></a>
+
 </div>
   )
 }

@@ -3,17 +3,22 @@
   table {
     width: 100%;
     border-collapse: collapse;
+    font-size: 12px;
+
   }
   
   th,
   td {
     padding: 15px;
     text-align: left;
+    max-width: 60px;
+    
   }
+  
   
   th {
     background-color: #f2f2f2;
-    color:rgb(215, 214, 214);
+    color:rgb(26, 25, 25);
   }
   
   tbody tr:nth-child(even) {
@@ -31,12 +36,13 @@
   }
 }
 
+
 tbody tr:nth-child(even) {
-  background-color: #020202;
-  color: #6c7293;
+  background-color: #f5f7fa;
+  color: #2d2d2e;
 }
 tbody tr:nth-child(odd) {
-  background-color: #191c24;
+  background-color: #ebeef5;
   color: #6c7293;
 }
 .page_btn{
@@ -49,15 +55,19 @@ tbody tr:nth-child(odd) {
 table {
   border-spacing: 0;
   font-size: 16px;
+  box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
 }
 
 
 /* Apply padding to each box */
 th,
 td {
-  padding-top: 10px;
-  padding-bottom: 10px;
+  padding-top: 15px;
+  padding-bottom: 2%;
   text-align: center;
+  word-wrap: break-word;
+   /* Adjust the maximum width as needed */
+  white-space: normal;
 }
 
 /* Add margin and padding to the container */
@@ -65,7 +75,9 @@ td {
   color: aliceblue;
   margin-bottom: 16px;
   padding: 8px;
+  
 }
+
 
 /* Adjust the gap between page buttons */
 .page_btn button {
@@ -85,11 +97,16 @@ th input[type="text"] {
   border: 1px solid #ccc;
 }
 .App{
-  color:#f2f2f2
+  color:#f2f2f2;
+  font-size: 8px;
 }
 .search{
   width:85%;
   border-radius: 5px;
+}
+.tb_{
+  border-radius: 10px;
+
 }
 
 /* Add additional styling as needed */

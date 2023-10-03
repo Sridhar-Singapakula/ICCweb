@@ -13,7 +13,7 @@ const Blog = () => {
     const [data, setData] = useState({
 		name: "",
 		subject: "",
-        img:"",
+    img:"",
 		blog: "",
 	});
 	const [errors, setErrors] = useState({});

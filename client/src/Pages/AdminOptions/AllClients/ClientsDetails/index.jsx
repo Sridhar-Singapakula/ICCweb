@@ -10,12 +10,11 @@ const GCPoints = () => {
   const { user } = useSelector((state) => state.user);
   const [selectedClientId, setSelectedClientId] = useState(null);
   const [isFetching, setIsFetching] = useState(false);
-  const columns = ["HostelName","TotalGCPoints","NoOfGold","EditDetails"];
+  const columns = ["HostelName","TotalGCPoints","NoOfGold","AddPoints"];
   const pageLimit = 10;
 
   useEffect(() => {
     getHostels();
-    // getTestName();
   }, []);
 
   const getHostels = async () => {
@@ -31,9 +30,8 @@ const GCPoints = () => {
     }
   };
 
-  const openUpload = (clientId,totalCost,hostelName) => {
-    setSelectedClientId({ id: clientId, totalCost:totalCost,hostelName:hostelName});
-    
+  const openUpload = (clientId,totalGCpoints,NoOfGold,hostelName) => {
+    setSelectedClientId({ id: clientId, points:totalGCpoints,numberOfGold:NoOfGold,name:hostelName});
   };
 
   const closeUpload = () => {
@@ -43,21 +41,15 @@ const GCPoints = () => {
   const transformData = () => {
     return hostels
       .map((hostel) => {
-  
+       
         return {
         HostelName: hostel.hostelName,
         TotalGCPoints: hostel.totalGCpoints ?? 0,
         NoOfGold: hostel.numberOfGold ?? 0,
-        EditDetails:<button className="button-17" onClick={() => openUpload(hostel._id,hostel.totalGCpoints,hostel.hostelName)} >Edit Details</button>
+        AddPoints:<button className="button-17" onClick={() => openUpload(hostel._id,hostel.totalGCpoints,hostel.NoOfGold,hostel.hostelName)} >Add+</button>
         };
       });
   };
-  
- 
-  
-  
-  
-  
 
   return (
     <div className="container">
@@ -65,7 +57,7 @@ const GCPoints = () => {
         GC Points
       </h1>
       <Table data={transformData()} columns={columns} pageLimit={pageLimit} />
-      {selectedClientId && <EditClient clientId={selectedClientId.id} totalCost={selectedClientId.totalGCpoints} hostelName={selectedClientId.hostelName} onClose={closeUpload} />}
+      {selectedClientId && <EditClient hostelId={selectedClientId.id} points={selectedClientId.points} numberOfGold={selectedClientId.numberOfGold} hostelName={selectedClientId.name} onClose={closeUpload} />}
     </div>
   );
 };

@@ -11,7 +11,7 @@ import axiosInstance from '../../../../redux/axiosInstance';
 
 
 
-const EditClient = ({ hostelId,totalGCPoints,hostelName,onClose }) => {
+const EditClient = ({ hostelId,points,numberOfGold,hostelName,onClose }) => {
     const { user } = useSelector((state) => state.user);
 
   const [errors, setErrors] = useState({});
@@ -20,21 +20,18 @@ const EditClient = ({ hostelId,totalGCPoints,hostelName,onClose }) => {
   
 
   const [data, setData] = useState({ 
-    totalGCPoints:totalGCPoints ?? null,
-    
+    points:null,
   });
   const yesOrNo=[
     {name:"Yes",value:true},
     {name:"No",value:false}
  ]
-     
-   
-
 
   const handleInputState = (name, value) => {
+    const numericValue = parseFloat(value);
        setData((prevState) => ({
         ...prevState,
-        [name]: value,
+        [name]: numericValue,
       }));
     
   };
@@ -45,22 +42,20 @@ const EditClient = ({ hostelId,totalGCPoints,hostelName,onClose }) => {
         ? delete errors[name]
         : setErrors({ ...errors, [name]: value });
 };
-     
-   console.log(hostelId)
-
-        console.log(data)
         const handleSubmit = async (e) => {
+          
 		
             e.preventDefault();
         
             if (Object.keys(errors).length === 0) {
                 
               setIsFetching(true);
-              const url = process.env.REACT_APP_API_URL + `/${hostelId}/add-points`;
+              console.log(data)
+              const url = process.env.REACT_APP_API_URL + `/GC/${hostelId}/add-points`;
               await axiosInstance.post(url, data);
               
               setIsFetching(false);
-              toast.success("Updated Client successfully");
+              toast.success("GC points added successfully");
                 onClose()
             } else {
                 console.log("please fill out properly");
@@ -76,12 +71,12 @@ const EditClient = ({ hostelId,totalGCPoints,hostelName,onClose }) => {
                 
                       <TextField
 						            label="Add GC Points"
-                        name="totalGCPoints"
+                        name="points"
 						            placeholder="Add GC Points"
                         handleInputState={handleInputState}
-						            value={data.totalGCPoints}
-                        error={errors.totalGCPoints}
-                        type="totalGCPoints"
+						            value={data.points}
+                        error={errors.points}
+                        type="points"
 						            style={{ width: '200px', fontSize: '12px', padding: '4px', height: '40px', background:"transparent",border:"2px solid black",color:"orange"}}
 					            />
                 <div className="form_bottom">

@@ -11,7 +11,7 @@ import Button from "../../components/Button";
 import GoogleIcon from "@mui/icons-material/Google";
 import {login }from "../../redux/authSlice/apiCalls"
 import styles from "./styles.module.scss";
-
+import logo from "../../img/images/logo.png";
 import "./style.css";
 import ICClogo from "../../img/images/ICClogo.png"
 

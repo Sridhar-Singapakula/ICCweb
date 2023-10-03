@@ -19,7 +19,7 @@
   .sidebar_container {
 	height:auto;
 	width: 27rem;
-	transition: transform 0.3s ease-in-out;
+	transition: transform 0.1s ease-in-out;
   }
   
   .sidebar_container.open {

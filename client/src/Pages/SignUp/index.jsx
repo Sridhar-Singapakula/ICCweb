@@ -8,7 +8,7 @@ import TextField from "../../components/Inputs/TextField";
 import Checkbox from "../../components/Inputs/Checkbox";
 import Button from "../../components/Button";
 import styles from "./styles.module.scss";
-import logo from "../../img/images/ICClogo.png";
+import logo from "../../img/images/logo.png";
 import "./style.css"
 
 

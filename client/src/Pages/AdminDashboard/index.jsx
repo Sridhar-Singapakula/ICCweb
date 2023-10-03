@@ -4,7 +4,7 @@ import  "./style.css"
 import SidebarAdmin from "../../components/SidebarAdmin"
 import AdminRoutes from "../../AdminRoutes"
 import { useSelector } from "react-redux";
-import logo from "../../img/images/ICClogo.png";
+import logo from "../../img/images/logo.jpg";
 
 const ClientDashboard = () => {
 
@@ -33,7 +33,7 @@ const ClientDashboard = () => {
   };
 
   
-  const handleSidebarClick = () => {
+  const handleComponentClick = () => {
     if (isMobile && isSidebarOpen) {
       setIsSidebarOpen(false);
     }
@@ -47,7 +47,7 @@ const ClientDashboard = () => {
         {isMobile ? (
           <>
             <div className={`sidebar_container ${isSidebarOpen ? "open" : ""}`}>
-              <SidebarAdmin onClick={handleSidebarClick} />
+              <SidebarAdmin handleComponentClick={handleComponentClick} />
             </div>
             <div className={`client_area mobile ${isSidebarOpen ? "sidebar-open" : ""}`}>
               <AdminRoutes />
@@ -59,7 +59,7 @@ const ClientDashboard = () => {
         ) : (
           <>
             <div className="sidebar_container open">
-              <SidebarAdmin onClick={handleSidebarClick} />
+              <SidebarAdmin onClick={handleComponentClick} />
             </div>
             <div className="client_area">
               <AdminRoutes />

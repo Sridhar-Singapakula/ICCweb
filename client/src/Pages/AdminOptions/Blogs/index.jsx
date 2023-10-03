@@ -31,14 +31,12 @@ const Blogs = () => {
     
 
 
-      const getBlogs = async () => {
+    const getBlogs = async () => {
 		try {
 			setIsFetching(true);
 			const url = process.env.REACT_APP_API_URL + `/blog`;
 			const { data } = await axiosInstance.get(url);
-			console.log(data)
 			setBlogs(data.data);
-			console.log(blogs)
 			setIsFetching(false);
 		} catch (error) {
 			console.log(error);
