@@ -44,20 +44,6 @@ const CreateCompetition = () => {
     const schema = {
         name: Joi.string().required()}
 
-
-
-   
-
-    // const transformData = () => {
-    //         return competition.participants.map((p) => {
-          
-    //             return {
-    //               rollNo:p.rollNo,
-    //               name:p.name,
-    //               Hostel:p.hostelNo
-    //           };
-    //         });
-    //       };
     
 	const handleSubmit = async (e) => {
 		e.preventDefault();
@@ -86,18 +72,7 @@ const CreateCompetition = () => {
         
 		
 	};
-    // const getBlogs = async () => {
-    //     try {
-    //         setIsFetching(true);
-    //         const url = process.env.REACT_APP_API_URL + `/GCparticipants/${competitionId}`;
-    //         const { data } = await axiosInstance.get(url);
-    //         setCompetition(data.data);
-    //         setIsFetching(false);
-    //     } catch (error) {
-    //         console.log(error);
-    //         setIsFetching(false);
-    //     }
-    // };
+
 
   return (
     <div className='partici_'>
@@ -113,7 +88,7 @@ const CreateCompetition = () => {
                         type="name"
                         style={{ maxWidth: '500px', fontSize: '12px', padding: '4px', height: '40px' }}
 					            />
-      <button onClick={handleSubmit} className='button-17'>Create Competition +</button>
+      <button onClick={handleSubmit} className='button-17'>Create GC Result+</button>
       {competitionId && (
         <ParticipantsTable competitionId = {competitionId}/>
       )}

@@ -41,4 +41,22 @@ router.get('/', async (req, res) => {
   }
 });
 
+// Delete a event
+router.delete('/:id', async (req, res) => {
+  try {
+    const { id } = req.params;
+
+    const deletedTest = await Event.findByIdAndDelete(id);
+
+    if (!deletedTest) {
+      return res.status(404).send({ message: 'Announcement not found' });
+    }
+
+    res.status(200).send({ message: 'Announcement deleted successfully' });
+  } catch (error) {
+    console.error(error.message);
+    res.status(500).send('Server error');
+  }
+});
+
 module.exports = router;

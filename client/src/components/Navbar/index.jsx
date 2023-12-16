@@ -3,6 +3,7 @@ import { useHistory, Link } from "react-router-dom";
 import AOS from 'aos';
 import { useEffect,useState } from 'react';
 import ICClogo from "../../img/images/ICClogo.png";
+import "./style.css"
 
 
 const Navbar = () => {
@@ -50,7 +51,8 @@ const Navbar = () => {
               </a>
             </li>
             <li onClick={handleNavLinkClick}><a className="nav-link scrollto" href="#contact">Contact</a></li>
-            <Link to="/blogs" onClick={handleNavLinkClick}><li><a className="nav-link scrollto" href="/blogs">Blogs</a></li></Link>
+            <li onClick={handleNavLinkClick}><a className="nav-link scrollto" href="#contact">Blogs</a></li>
+            <li onClick={handleNavLinkClick}><a className="nav-link scrollto" href="#contact"><button className="button-40">Login</button></a></li>
           </ul>
           <i className="bi bi-list mobile-nav-toggle" onClick={handleMobileNavToggle} ></i>
         </nav>

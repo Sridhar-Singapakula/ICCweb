@@ -6,7 +6,6 @@ import SearchIcon from "@mui/icons-material/Search";
 import "./style.css"
 import AddIcon from "@mui/icons-material/Add";
 import styles from "./styles.module.scss";
-import logo from "../../img/images/logo.png"
 
 const Sidebar = ({ handleComponentClick }) => {
 	

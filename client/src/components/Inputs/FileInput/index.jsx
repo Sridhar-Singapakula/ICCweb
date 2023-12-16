@@ -1,51 +1,46 @@
 import { useRef, useState } from "react";
-import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
-import storage from "../../../firebase"
 import { CircularProgress } from "@mui/material";
 import { toast } from "react-toastify";
 import Button from "../../Button";
 import styles from "./styles.module.scss";
 import CheckCircleIcon from "@mui/icons-material/CheckCircle";
 
-
 const FileInput = ({
-	name,
-	label,
-	value,
-	type,
-	handleInputState,
-	...rest
-  }) => {
-	const inputRef = useRef();
-	const [progress, setProgress] = useState(0);
-	const [progressShow, setProgressShow] = useState(false);
-  
-	const handleUpload = () => {
-	  setProgressShow(true);
-	  const fileName = new Date().getTime() + value.name;
-	  const storageRef = ref(storage, 
-		type==="pdf" ? `/pdfs/${fileName}` : `/images/${fileName}`);
-	  const uploadTask = uploadBytesResumable(storageRef, value);
-  
-	  uploadTask.on(
-		"state_changed",
-		(snapshot) => {
-		  const uploaded = Math.floor(
-			(snapshot.bytesTransferred / snapshot.totalBytes) * 100
-		  );
-		  setProgress(uploaded);
-		},
-		(error) => {
-		  console.log(error);
-		  toast.error("An error occurred while uploading!");
-		},
-		() => {
-		  getDownloadURL(uploadTask.snapshot.ref).then((url) => {
-			handleInputState(name, url);
-		  });
-		}
-	  );
-	};
+  name,
+  label,
+  value,
+  type,
+  handleInputState,
+  ...rest
+}) => {
+  const inputRef = useRef();
+  const [progress, setProgress] = useState(0);
+  const [progressShow, setProgressShow] = useState(false);
+
+  const handleUpload = () => {
+    setProgressShow(true);
+
+    const formData = new FormData();
+    formData.append("file", value);
+
+    fetch(process.env.REACT_APP_API_URL+"/upload", {
+      method: "POST",
+      body: formData,
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        if (data.success) {
+          handleInputState(name, data.imageUrl); // Set the uploaded image URL
+        } else {
+          toast.error("An error occurred while uploading!");
+        }
+      })
+      .catch((error) => {
+        console.error(error);
+        toast.error("An error occurred while uploading!");
+      });
+  };
+
   
 	return (
 	  <div className={styles.container}>
@@ -73,11 +68,11 @@ const FileInput = ({
         />
 		)}
 		{type === "image" && value && (
-				<img
-					src={typeof value === "string" ? value : URL.createObjectURL(value)}
-					controls
-				/>
-			)}
+        <img
+          src={value} // Set the image URL as the source
+          alt="Uploaded Image"
+        />
+      )}
 		{value !== null && !progressShow && typeof value !== "string" && (
 				<Button
 					onClick={handleUpload}

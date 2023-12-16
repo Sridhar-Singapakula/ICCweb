@@ -1,5 +1,5 @@
 const mongoose = require("mongoose");
-
+mongoose.set("strictQuery",true);
 
 module.exports =async () => {
    const connectionParams={
@@ -7,8 +7,8 @@ module.exports =async () => {
        useUnifiedTopology:true
 }
   try {
-      mongoose.connect('mongodb+srv://Admin:admin@cluster0.ezsj37r.mongodb.net/ICC?retryWrites=true&w=majority');
-      console.log("db connected");
+      mongoose.connect('mongodb://localhost:27017/ICCweb',()=>{
+   console.log("Database connected")});
 }
  catch (error) {
     console.log(error);

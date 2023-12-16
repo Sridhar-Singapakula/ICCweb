@@ -53,8 +53,9 @@ const AddParticipantToCompetition = ({ competitionId, onClose }) => {
 
     return (
         <div className="popup_container">
+             <h2>Add Participant to Competition</h2>
             <div className="popup_content">
-                <h2>Add Participant to Competition</h2>
+               
                 <div className="select-container">
                     <form onSubmit={handleSubmit} className="form_container">
                         <TextField

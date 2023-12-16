@@ -25,11 +25,11 @@
     background-color: #F8F6F4;
   }
   
-  input[type="text"] {
+  /* input[type="text"] {
     width: 100%;
     box-sizing: border-box;
     padding: 4px;
-  }
+  } */
   
   button {
     margin: 4px;
@@ -62,12 +62,17 @@ table {
 /* Apply padding to each box */
 th,
 td {
+  
   padding-top: 15px;
   padding-bottom: 2%;
   text-align: center;
   word-wrap: break-word;
    /* Adjust the maximum width as needed */
   white-space: normal;
+  
+}
+th{
+  background-color: #f2f2f2;
 }
 
 /* Add margin and padding to the container */

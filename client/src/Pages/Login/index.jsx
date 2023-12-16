@@ -11,7 +11,6 @@ import Button from "../../components/Button";
 import GoogleIcon from "@mui/icons-material/Google";
 import {login }from "../../redux/authSlice/apiCalls"
 import styles from "./styles.module.scss";
-import logo from "../../img/images/logo.png";
 import "./style.css";
 import ICClogo from "../../img/images/ICClogo.png"
 
@@ -73,7 +72,7 @@ const Login = () => {
         </div>
         </Link>
       </div>
-      <main className={styles.main}>
+      <div className={styles.main}>
         <h1 className={styles.heading}>
           To continue, log in to ICC Admin Dashboard.
         </h1>
@@ -122,7 +121,7 @@ const Login = () => {
             />
           </div>
         </form>
-      </main>
+      </div>
     </div>
   );
 };

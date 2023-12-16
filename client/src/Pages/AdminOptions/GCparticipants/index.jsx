@@ -9,7 +9,8 @@ import "./style.css"
 import axiosInstance from "../../../redux/axiosInstance"
 import { toast } from "react-toastify";
 import Table from '../../../components/Table';
-import ParticipantsTable from "./ParticipantsTable"
+import ParticipantsTable from "./ParticipantsTable";
+
 
 const CreateCompetition = () => {
     const [data, setData] = useState({

@@ -18,10 +18,20 @@ import 'remixicon/fonts/remixicon.css';
 import 'swiper/swiper.min.css';
 import 'swiper/swiper-bundle.min.css';
 import './style.css';
+import Carousel1 from "./carousel";
+import Web from "../../img/images/Sridhar.jpg";
+import Aditi from "../../img/images/Aidti.jfif";
 
 
 import { Query } from '../../redux/userSlice/apiCalls';
+import herohead from "../../img/images/hero_head.png";
+import idea from "../../img/images/Idea.png";
+import diversity from "../../img/images/Done.png";
+import community from "../../img/images/Play.png";
 
+import dance_1 from "../../img/images/dance_1.jpg";
+import dance_2 from "../../img/images/dance_2.jpg";
+import dance_3 from "../../img/images/dance_3.webp";
 
 
 import ICClogo from "../../../src/img/images/ICClogo.png";
@@ -63,6 +73,9 @@ const Main = () => {
 		subject: "",
 		message: "",
 	});
+  const images=[
+    dance_1,dance_2,dance_3
+  ]
 	const [errors, setErrors] = useState({});
 	const [isFetching, setIsFetching] = useState(false);
 	const dispatch = useDispatch();
@@ -85,342 +98,273 @@ const Main = () => {
 		res && history.push("/");
 	};
 
-    const [isMobileNavOpen, setIsMobileNavOpen] = useState(false); 
-
-    const handleMobileNavToggle = () => {
-        setIsMobileNavOpen(!isMobileNavOpen);
-    };
-    const handleNavLinkClick = () => {
-      setIsMobileNavOpen(false);
-    };
-    const sliderSettings = {
-        dots: true,
-        autoplay: true,
-        autoplaySpeed: 4000, // Set the interval between slides (in milliseconds)
-      };
       useEffect(() => {
         AOS.init();
-        
       }, []);
-
+      
   return (
-    <div className="main">
-      <Navbar/>
-    <section id="hero" className="d-flex align-items-center">
-      <div className="container" data-aos="zoom-out" data-aos-delay="100">
-        <div className="main_page">
-          <div className="col-xl-7 ">
-            <h1>Unleashing Creativity:<br/><span className="text" style={{color:"lightyellow"}}>Institute Cultural Council </span></h1>
-            <h1 style={{color:"lightblue",fontSize:"25px"}}> IIT Bombay</h1>
-            <Link to="/login" className="btn-get-started">Explore</Link>
-            <Link to="/Patient" className="btn-buy">Play Video <i className="bi bi-play" ></i></Link>
-          </div>
-          <div className="col-xl-7">
-        <Slider
-    dots={true}
-    infinite={true}
-    speed={500}
-    slidesToShow={1}
-    slidesToScroll={1}
-    autoplay={true}
-    autoplaySpeed={2000}
-  >
-   
+    <div>
+    <Navbar/>
+    <section className="main_">
+      <div className="hero_heading">
+        <h4 className="hero_h4">
+          Welcome to a Dazzling Showcase  of Culture and Creativity!
+        </h4>
+        <p className="hero_p">
+          Explore  the rich tapestry of creativity and talent of IIT Bombay as we present a spectacular showcase of cultural events and performances.
+        </p>
+        <button className="button-30">Explore</button>
+      </div>
+      <div>
+        <img src={herohead} className="hero_img">
+        </img>
+      </div>
+    </section>
+    <section>
+      <div className="about_us">
+        <h4 className="about_us_h4">
+          Who are we
+        </h4>
+        <p className="about_us_p">
+        We are the spirited artisans of IIT Bombay, passionate advocates of culture, we weave diverse threads into the vibrant fabric of our community, celebrating the beauty of art in all its forms.
+        </p>
+      </div>
+      <div className="about_us_1">
+        <div className="about_us_divs">
+          <img src={idea} className="about_us_img">
+          </img>
+          <h4>
+            Creativity
+          </h4>
+          <p >
+          At the intersection of imagination and fun, we craft creations that light up our world.
+          </p>
+        </div>
+        <div className="about_us_divs">
+        <img src={diversity} className="about_us_img">
+          </img>
+          <h4>
+          Diversity
+          </h4>
+          <p >
+          Like a vibrant mosaic, we celebrates the delightful patchwork of cultures.
+          </p>
+
+        </div>
+        <div className="about_us_divs">
+        <img src={community} className="about_us_img">
+          </img>
+          <h4>
+          Community
+          </h4>
+          <p >
+          Together, we embark on a journey, where our love for creativity forms the community.
+          </p>
+
+        </div>
+
+      </div>
+      <div>
+      </div>
+    </section>
+    <section className="photo_gallery">
+      <h4 className="about_us_h4">Photo Gallery</h4>
+      <Carousel1 images={images}/>
+    </section>
+    <section className="clubs">
+    <h4 className="about_us_h4">Clubs</h4>
     
-    <div>
-      <img src={dance} className="img-fluid" alt="" />
-    </div>
-    <div>
-      <img src={sing} className="img-fluid" alt="" />
-    </div>
-    <div>
-      <img src={photography} className="img-fluid" alt="" />
-    </div>
-    <div>
-      <img src={roots} className="img-fluid" alt="" />
-    </div>
-    <div>
-      <img src={Design} className="img-fluid" alt="" />
-    </div>
-    <div>
-      <img src={literature} className="img-fluid" alt="" />
-    </div>
-    <div>
-      <img src={film} className="img-fluid" alt="" />
-    </div>
-    <div>
-      <img src={comedy} className="img-fluid" alt="" />
-    </div>
-    <div>
-      <img src={fashion} className="img-fluid" alt="" />
-    </div>
-    
-  </Slider>
+    <div className="clubs_1">
+      <a href="/insync">
+
+      <div className="club_divs">
+      <div className="club_img_div">
+        <img src={InSyncClub} className="club_images">
+        </img>
         </div>
+        <div className="club_head">
+          <h4>
+            Insync-The Dance Club
+          </h4>
         </div>
-        
-        
       </div>
+      </a>
+     
+      <div className="club_divs">
+      <div className="club_img_div">
+        <img src={SymphonyClub} className="club_images">
+        </img>
+        </div>
+        <div className="club_head">
+          <h4>
+            Symphony-The Music Club
+          </h4>
+        </div>
+      </div>
+      <div className="club_divs">
+      <div className="club_img_div">
+        <img src={RootsLogo} className="club_images">
+        </img>
+        </div>
+        <div className="club_head">
+          <h4>
+            Roots
+          </h4>
+        </div>
+      </div>
+      <div className="club_divs">
+      <div className="club_img_div">
+        <img src={FourthWallClub} className="club_images">
+        </img>
+        </div>
+        <div className="club_head">
+          <h4>
+            FourthWall-The Dramatic Club
+          </h4>
+        </div>
+      </div>
+      <div className="club_divs">
+      <div className="club_img_div">
+        <img src={VaaniClub} className="club_images">
+        </img>
+        </div>
+        <div className="club_head">
+          <h4>
+            Vaani-Indian languages club
+          </h4>
+        </div>
+      </div>
+      <div className="club_divs">
+      <div className="club_img_div">
+        <img src={SilverScreenClub} className="club_images">
+        </img>
+        </div>
+        <div className="club_head">
+          <h4>
+            SilverScreen-The Film Club
+          </h4>
+        </div>
+      </div>
+      <div className="club_divs">
+      <div className="club_img_div">
+        <img src={StyleUpClub} className="club_images">
+        </img>
+        </div>
+        <div className="club_head">
+          <h4>
+           StyleUp-Fashion Club
+          </h4>
+        </div>
+      </div>
+      <div className="club_divs">
+      <div className="club_img_div">
+        <img src={ComedyConsClub} className="club_images">
+        </img>
+        </div>
+        <div className="club_head">
+          <h4>
+            ComedyCons-Humor Club
+          </h4>
+        </div>
+      </div>
+      <div className="club_divs">
+      <div className="club_img_div">
+        <img src={WeSpeakClub} className="club_images">
+        </img>
+        </div>
+        <div className="club_head">
+          <h4>
+            WeSpeak-Debate club
+          </h4>
+        </div>
+      </div>
+      <div className="club_divs">
+      <div className="club_img_div">
+        <img src={LiteratiClub} className="club_images">
+        </img>
+        </div>
+        <div className="club_head">
+          <h4>
+            Literati-Literary arts Club
+          </h4>
+        </div>
+      </div>
+      <div className="club_divs">
+      <div className="club_img_div">
+        <img src={DesignClub} className="club_images">
+        </img>
+        </div>
+        <div className="club_head">
+          <h4>
+            The Design Club
+          </h4>
+        </div>
+      </div>
+      <div className="club_divs">
+      <div className="club_img_div">
+        <img src={PixelsClub} className="club_images">
+        </img>
+        </div>
+        <div className="club_head">
+          <h4>
+            Pixels-Photography Club
+          </h4>
+        </div>
+      </div>
+      
+    </div>
+
     </section>
-
-  <div id="main">
-  <section  className="about" >
-      <div className="container" data-aos="fade-up">
-        <div className="row gx-0">
-
-          <div className="col-lg-6 d-flex align-items-center" data-aos="zoom-out" data-aos-delay="200">
-            <img src={main} className="img-fluid" alt="" />
-          </div>
-          <div className="col-lg-6 d-flex flex-column justify-content-center" data-aos="fade-up" data-aos-delay="200">
-            <div className="card" style={{color:"black",padding:"25px"}}>
-              <h3 style={{fontSize:"30px",fontStyle:"bolder",fontWeight:"1000"}}>Who We Are</h3>
-              <h2 style={{fontSize:"20px",fontWeight:"700"}}>Creating Opportunities for Artistic Expression and Cultural Exchange</h2>
-              <p style={{fontSize:"14px",color:"grey"}}>
-                At the Institute Cultural Council, we are committed to fostering creativity, diversity, and community through our 13 clubs, each dedicated to a different form of artistic expression. Our clubs include photography, dramatics, dance, singing, literature, design, and more.
-                Our mission is to provide a platform for students to explore their passions and develop their talents, while also promoting collaboration, inclusivity, and cultural exchange.
-              </p>
+    <section className="contact">
+      <div className="contact_divs">
+        <div>
+        <h4 className="contact_h4">
+        Let's Talk
+        </h4>
+        <form onSubmit={handleSubmit} className="email-form">
               
-            </div>
-            <div class="blob"></div>
-          </div>
-         
-
-        </div>
-       
-      </div>
-    </section>
-    <section id="services" className="services section-bg ">
-      <div className="container" data-aos="fade-up">
-
-        <div className="section-title">
-          <h2>Clubs</h2>
-          {/* <p style={{fontSize:"14px"}}> Lorem ipsum dolor, sit amet consectetur adipisicing elit. Illum natus saepe, totam esse sit numquam doloremque iusto illo quia corporis aut enim, unde repellendus <br/></p> */}
-        </div>
-        
-        <div className="row">
-        
-          <div className="col-md-6">
-          
-          <div class="blob"></div>
-          <a href="/roots">
-            <div className="icon-box" data-aos="fade-up" data-aos-delay="100" style={{display:"flex"}}>
-              <div className="logo_desc" >
-                <img src={RootsLogo} className="logo_img"></img>
-              </div>
-              <div>
-              <h4>Roots Club<a href=""></a></h4>
-              <p>The Classical and Folk Arts Club of IIT Bombay </p>
-              </div>
-              
-            </div>
-            </a>
-          </div>
-          <div className="col-md-6 mt-4 mt-md-0">
-          <a href="/fourthwall">
-            <div className="icon-box" data-aos="fade-up" data-aos-delay="100" style={{display:"flex"}}>
-              <div className="logo_desc" >
-                <img src={FourthWallClub} className="logo_img"></img>
-              </div>
-              <div>
-              <h4>FourthWall <a href=""></a></h4>
-              <p>The Dramatics Club of IIT Bombay </p>
-              </div>
-            </div>
-            </a>
-          </div>
-          <div className="col-md-6 mt-4 mt-md-0">
-          <a href="/insync">
-            <div className="icon-box" data-aos="fade-up" data-aos-delay="100" style={{display:"flex"}}>
-              <div className="logo_desc" >
-                <img src={InSyncClub} className="logo_img"></img>
-              </div>
-              <div>
-              <h4>InSync <a href=""></a></h4>
-              <p>The Dance Club of IIT Bombay</p>
-              </div>
-            </div>
-            </a>
-          </div>
-          <div className="col-md-6 mt-4 mt-md-0">
-          <a href="/symphony">
-            <div className="icon-box" data-aos="fade-up" data-aos-delay="100" style={{display:"flex"}}>
-              <div className="logo_desc" >
-                <img src={SymphonyClub} className="logo_img" ></img>
-              </div>
-              <div>
-              <h4>Symphony<a href=""></a></h4>
-              <p>The Music Club of IIT Bombay </p>
-              </div>
-            </div>
-            </a>
-          </div>
-          <div className="col-md-6 mt-4 mt-md-0">
-          <a href="/wespeak">
-            <div className="icon-box" data-aos="fade-up" data-aos-delay="100" style={{display:"flex"}}>
-              <div className="logo_desc" >
-                <img src={WeSpeakClub} className="logo_img" ></img>
-              </div>
-              <div>
-              <h4>WeSpeak <a href=""></a></h4>
-              <p>The Debating Club of IIT Bombay </p>
-              </div>
-            </div>
-            </a>
-          </div>
-          <div className="col-md-6 mt-4 mt-md-0">
-          <a href="/comedycons">
-            <div className="icon-box" data-aos="fade-up" data-aos-delay="100" style={{display:"flex"}}>
-              <div className="logo_desc" >
-                <img src={ComedyConsClub} className="logo_img" style={{width:"120%"}}></img>
-              </div>
-              <div>
-              <h4>ComedyCons<a href=""></a></h4>
-              <p>The Comedy Club of IIT Bombay</p>
-              </div>
-            </div>
-            </a>
-            
-          </div>
-          <div className="col-md-6 mt-4 mt-md-0">
-          <a href="/styleup">
-            <div className="icon-box" data-aos="fade-up" data-aos-delay="100" style={{display:"flex"}}>
-              <div className="logo_desc" >
-                <img src={StyleUpClub} className="logo_img"></img>
-              </div>
-              <div>
-              <h4>StyleUp <a href=""></a></h4>
-              <p>The Fashion Club of IIT Bombay </p>
-              </div>
-            </div>
-            </a>
-          </div>
-          <div className="col-md-6 mt-4 mt-md-0">
-          <a href="/literati">
-            <div className="icon-box" data-aos="fade-up" data-aos-delay="100" style={{display:"flex"}}>
-              <div className="logo_desc" >
-                <img src={LiteratiClub} className="logo_img"></img>
-              </div>
-              <div>
-              <h4>Literati <a href=""></a></h4>
-              <p>The Literary Arts Club of IIT Bombay</p>
-              </div>
-            </div>
-            </a>
-          </div>
-          <div className="col-md-6">
-          <a href="/vaani">
-            <div className="icon-box" data-aos="fade-up" data-aos-delay="100" style={{display:"flex"}}>
-              <div className="logo_desc" >
-                <img src={VaaniClub} className="logo_img"></img>
-              </div>
-              <div>
-              <h4>Vaani  <a href=""></a></h4>
-              <p>The Indian Languages Club of IIT Bombay </p>
-              </div>
-            </div>
-            </a>
-          </div>
-          <div className="col-md-6 mt-4 mt-md-0">
-          <a href="/pixels">
-            <div className="icon-box" data-aos="fade-up" data-aos-delay="100" style={{display:"flex"}}>
-              <div className="logo_desc" >
-                <img src={PixelsClub} className="logo_img"></img>
-              </div>
-              <div>
-              <h4>Rang & Pixels<a href=""></a></h4>
-              <p>The Photography and Fine Arts Club of IIT Bombay</p>
-              </div>
-            </div>
-            </a>
-          </div>
-          <div className="col-md-6 mt-4 mt-md-0">
-          <a href="/silverscreen">
-            <div className="icon-box" data-aos="fade-up" data-aos-delay="100" style={{display:"flex"}}>
-              <div className="logo_desc" >
-                <img src={SilverScreenClub} className="logo_img"></img>
-              </div>
-              <div>
-              <h4>SilverScreen <a href=""></a></h4>
-              <p>The Film and Media Club of IIT Bombay</p>
-              </div>
-            </div>
-            </a>
-          </div>
-          <div className="col-md-6 mt-4 mt-md-0">
-          <a href="/design">
-            <div className="icon-box" data-aos="fade-up" data-aos-delay="100" style={{display:"flex"}}>
-              <div className="logo_desc" >
-                <img src={DesignClub} className="logo_img" ></img>
-              </div>
-              <div>
-              <h4>The Design Club<a href=""></a></h4>
-              <p> Design Club of IIT Bombay</p>
-              </div>
-            </div>
-            </a>
-          </div>
-         
-        </div>
-
-      </div>
-    </section>
-
-    <section id="contact" className="contact">
-      <div className="container" data-aos="fade-up">
-
-        <div className="section-title">
-          <h2>Contact</h2>
-          <p>Have a Question? Contact Us</p>
-        </div>
-
-        <div className="row" data-aos="fade-up" data-aos-delay="100" style={{position:"relative",left:"30%"}}>
-          <div className="col-lg-6">
-          <div class="blob"></div>
-            <form onSubmit={handleSubmit} className="php-email-form">
-              <div className="row">
                 <div className="col form-group">
                       <TextField
-						            label="Name"
                         name="name"
-						            placeholder="Enter your Name"
+						            placeholder="Name"
                         handleInputState={handleInputState}
                         schema={schema.name}
 						            value={data.name}
                         error={errors.name}
                         type="name"
-						            style={{ width: '150px', fontSize: '12px', padding: '4px', height: '40px', }}
+                        style={{border:"none"}}
+						           
 					            />
                 </div>
                 <div className="col form-group">
                       <TextField
-						            label="Mobile Number"
-						            placeholder="Enter your Mobile Number"
+						            placeholder=" Mobile Number"
                         name="mobileNumber"
 						            handleInputState={handleInputState}
                         schema={schema.mobileNumber}
 						            value={data.mobileNumber}
                         error={errors.mobileNumber}
                         type="mobileNumber"
-						            style={{ width: '150px', fontSize: '12px', padding: '4px', height: '40px' }}
+                        style={{border:"none"}}
+						            
 					            />
                 </div>
                 <div className="col form-group">
                       <TextField
-						            label="Email Id"
-						            placeholder="Enter your Email Id"
+						            placeholder="Email Id"
                         name="emailId"
 						            handleInputState={handleInputState}
                         schema={schema.emailId}
 						            value={data.emailId}
                         error={errors.emailId}
                         type="emailId"
-						            style={{ width: '150px', fontSize: '12px', padding: '4px', height: '40px' }}
+                        style={{border:"none"}}
+						            
 					            />
                 </div>
-              </div>
-              <div className="form-group">
+              
+              <div className="col form-group">
                       <TextField
-						            label="Subject"
 						            placeholder="Subject"
                         name="subject"
 						            handleInputState={handleInputState}
@@ -428,12 +372,13 @@ const Main = () => {
 						            value={data.subject}
                         error={errors.subject}
                         type="subject"
-						            style={{ width: '500px', fontSize: '12px', padding: '4px', height: '40px' }}
+                        style={{border:"none"}}
+						           
 					            />
               </div>
-              <div className="form-group">
+              <div className="col form-group">
               <TextField
-						            label="Message?"
+						          
 						            placeholder="message"
                         name="message"
 						            handleInputState={handleInputState}
@@ -441,21 +386,52 @@ const Main = () => {
 						            value={data.message}
                         error={errors.message}
                         type="message"
-						            style={{ width: '500px', fontSize: '12px', padding: '4px', height: '40px' }}
+                        style={{border:"none"}}
+						            
 					            />
               </div>
-              <div className="text-center"><button type="submit">Send Message</button></div>
+              <div style={{marginTop:"20px"}}><button type="submit" className="button-40">Send Message</button></div>
             </form>
-          </div>
-
         </div>
-        
+        <div>
+          <img src={main} className="contact_img">
+          </img>
+        </div>
       </div>
-      
     </section>
-
-  </div>
-  <footer id="footer2" className="footer">
+    <section className="web">
+      <div className="web-divs">
+        <div className="web-div">
+          <img src={Web} className=""></img>
+        </div>
+        <div>
+          <h4>Sridhar Singapakula</h4>
+          <p>Institute Web Nominee</p>
+          <div className="links">
+          <a href="#" className="linkedin"><i className="bi bi-linkedin"></i></a>
+          <a href="#" className="email"><i className="bi bi-envelope"></i></a>
+          <a href="#" className="instagram"><i className="bi bi-instagram"></i></a>
+          
+          </div>
+        </div>
+      </div>
+      <div className="web-divs">
+        <div className="web-div">
+          <img src={Aditi} className=""></img>
+        </div>
+        <div>
+          <h4>Aditi Chintey</h4>
+          <p>Institue Publicity&Marketing Nominee</p>
+          <div className="links">
+          <a href="#" className="linkedin"><i className="bi bi-linkedin"></i></a>
+          <a href="#" className="email"><i className="bi bi-envelope"></i></a>
+          <a href="#" className="instagram"><i className="bi bi-instagram"></i></a>
+          
+          </div>
+        </div>
+      </div>
+    </section>
+    <footer id="footer2" className="footer">
       
 
       <div className="footer-top">
@@ -477,8 +453,8 @@ const Main = () => {
 
             
             <div className="col-lg-3 col-md-12 footer-contact text-center text-md-start">
-              <h4>Contact Us</h4>
-              <p>
+              <h4 className="about_us_h4">Contact Us</h4>
+              <p className="about_us_p" style={{color:"grey"}}>
                 Old SAC <br />
                 IIT Bombay<br />
                 Mumbai,India <br /><br />
@@ -490,7 +466,7 @@ const Main = () => {
         </div>
       </div>
     </footer>
-
+    
 </div>
   )
 }

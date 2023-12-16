@@ -13,8 +13,13 @@ import Event from "./Pages/AdminOptions/Event"
 import Events from './Pages/AdminOptions/Events';
 import GCparticipants from "./Pages/AdminOptions/GCparticipants";
 import GCFinalResults from "./Pages/AdminOptions/GCFinalResults";
+import GCFinalResultsNoPart from "./Pages/AdminOptions/GCFinalResults/WithoutPart";
 import GCGroupResult from "./Pages/AdminOptions/Group/GroupResult";
 import GCGroupParticipants from "./Pages/AdminOptions/Group/GroupParticipants";
+import AllDataFinalResults from "./Pages/AdminOptions/AllData/FinalResults";
+import GCPerformance from "./Pages/AdminOptions/GCFinalResults/GCPerformance";
+import GroupGCName from "./Pages/AdminOptions/GCFinalResults/GroupGCName";
+
 const AdminRoutes = () => {
   return (
     <Switch>
@@ -31,9 +36,12 @@ const AdminRoutes = () => {
         <Route path="/admin/Allevent" component={Events}/>
         <Route path="/admin/GCaddparticipants" component={GCparticipants}/>
         <Route path="/admin/GCFinaLResults" component={GCFinalResults}/>
+        <Route path="/admin/GCFinaLResultsNoPart" component={GCFinalResultsNoPart}/>
         <Route path="/admin/GCGroupResult" component={GCGroupResult}/>
         <Route path="/admin/GCGroupParticipants" component={GCGroupParticipants}/>
-
+        <Route path="/admin/AllData/GCFinalResults" component ={AllDataFinalResults}/>
+        <Route path="/admin/GCPerformance" component ={GCPerformance}/>
+        <Route path="/admin/GroupGCRank" component={GroupGCName}/>
         <Route path="/">
               <Home />
          </Route>

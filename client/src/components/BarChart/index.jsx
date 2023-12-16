@@ -2,6 +2,7 @@ import React from 'react';
 import { Bar } from 'react-chartjs-2';
 import { Chart as ChartJS } from "chart.js/auto";
 import 'chartjs-plugin-datalabels'; // Import the plugin
+import "./style.css"
 
 const BarGraph = ({ chartData, options }) => {
   // Customize the options for data labels and x-ticks
@@ -26,10 +27,10 @@ const BarGraph = ({ chartData, options }) => {
     scales: {
       x: {
         ticks: {
-          maxRotation: 60,
+          maxRotation: 0,
           autoSkip: false,
           font: {
-            size: 14, // Adjust the font size for x-ticks
+            size:12, // Adjust the font size for x-ticks
             weight: 'bold', // Make x-ticks bold
           },
         },

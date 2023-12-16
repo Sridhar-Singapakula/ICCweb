@@ -4,36 +4,27 @@ import './style.css';
 import axiosInstance from '../../redux/axiosInstance';
 import Navbar from '../../components/Navbar';
 import BarGraph from '../../components/BarChart';
-import right from "../../img/images/17924.png";
-import left from "../../img/images/left.png";
-import gy from "../../img/images/gy.jpg";
-import scrabble from "../../img/images/scrabble.jpg";
 import ICClogo from "../../img/images/ICClogo.png";
 import { useHistory, Link } from "react-router-dom";
-import 'chartjs-plugin-datalabels';
 
 
 const ClientDetails = () => {
   const [hostels, setHostels] = useState([]);
-  const [events, setEvents] = useState([]);
+  const [results, setResults] = useState([]);
   const [competition,setCompetitions] = useState([]);
   const [GroupCompetition,setGroupCompetitions] = useState([]);
   const [FinalResults,setFinalResults] = useState([]);
   const [GroupFinalResults,setGroupFinalResults] = useState([]);
   const [isFetching, setIsFetching] = useState(false);
   const hostelColumns = ['HostelName', 'TotalGCPoints', 'NoOfGold'];
-  const [searchQuery, setSearchQuery] = useState('');
+  const [search, setSearch] = useState("");
 
   const hostelPageLimit = 10;
  
 
   useEffect(() => {
     getHostels();
-    getEvents();
-    getCompetitions();
-    getGroupCompetitions();
-    getFinalResults();
-    getGroupFinalResults();
+    handleSearch({ currentTarget: { value: null } });
   }, []);
 
   const getHostels = async () => {
@@ -48,68 +39,22 @@ const ClientDetails = () => {
       setIsFetching(false);
     }
   };
-  const getEvents = async () => {
-    try {
-      setIsFetching(true);
-      const url = process.env.REACT_APP_API_URL + '/event';
-      const { data } = await axiosInstance.get(url);
-      setEvents(data.data);
-      setIsFetching(false);
-    } catch (error) {
-      console.log(error);
-      setIsFetching(false);
-    }
-  };
-  const getCompetitions = async () => {
-    try {
-      setIsFetching(true);
-      const url = process.env.REACT_APP_API_URL + '/GCparticipants';
-      const { data } = await axiosInstance.get(url);
-      setCompetitions(data.data);
-      setIsFetching(false);
-    } catch (error) {
-      console.log(error);
-      setIsFetching(false);
-    }
-  };
-  const getGroupCompetitions = async () => {
-    try {
-      setIsFetching(true);
-      const url = process.env.REACT_APP_API_URL + '/GCgroupparticipants';
-      const { data } = await axiosInstance.get(url);
-      setGroupCompetitions(data.data);
-      setIsFetching(false);
-    } catch (error) {
-      console.log(error);
-      setIsFetching(false);
-    }
-  };
-  const getFinalResults = async () => {
-    try {
-      setIsFetching(true);
-      const url = process.env.REACT_APP_API_URL + '/GCFinalResults';
-      const { data } = await axiosInstance.get(url);
-      setFinalResults(data.data);
-      setIsFetching(false);
-    } catch (error) {
-      console.log(error);
-      setIsFetching(false);
-    }
-  };
-  const getGroupFinalResults = async () => {
-    try {
-      setIsFetching(true);
-      const url = process.env.REACT_APP_API_URL + '/GroupResult';
-      const { data } = await axiosInstance.get(url);
-      setGroupFinalResults(data.data);
-      setIsFetching(false);
-    } catch (error) {
-      console.log(error);
-      setIsFetching(false);
-    }
-  };
-  
-
+  const handleSearch = async ({ currentTarget: input }) => {
+		setSearch(input.value);
+		try {
+      const url = process.env.REACT_APP_API_URL + (input.value ? `/search/?search=${input.value}` : '/search/');
+			const { data } = await axiosInstance.get(url);
+			setResults(data);
+		} catch (error) {
+			console.log(error);
+			setIsFetching(false);
+		}
+	};
+  const mergedData = [...results].sort((a, b) => {
+    const dateA = new Date(a.dateOfCreation);
+    const dateB = new Date(b.dateOfCreation);
+    return dateA - dateB; // Sort in descending order (latest date first)
+  });
   const findHighestTotalGCPointsHostel = () => {
     if (hostels.length === 0) {
       return null;
@@ -189,18 +134,28 @@ const ClientDetails = () => {
   const hostelcultColumns = ['Roll_No', 'Name', 'Hostel'];
   
   const FinalResultColumns = ['Roll_No', 'Name', 'Hostel',"Points"];
-
+  const FinalResultNoPartColumns = [ 'Position', 'Hostel',"Points"];
+  const IndPerformanceRankings = [ 'Position', "Name",'Hostel'];
+  const GroupPerformanceRankings = [ 'Position','Hostel'];
   // Merge events and competition arrays, sort by date
-  const mergedData = [...events, ...competition,...GroupCompetition,...FinalResults,...GroupFinalResults].sort((a, b) => {
-    const dateA = new Date(a.dateOfCreation);
-    const dateB = new Date(b.dateOfCreation);
-    return dateA - dateB; // Sort in descending order (latest date first)
-  });
+  // const mergedData = [...events, ...competition,...GroupCompetition,...FinalResults,...GroupFinalResults].sort((a, b) => {
+  //   const dateA = new Date(a.dateOfCreation);
+  //   const dateB = new Date(b.dateOfCreation);
+  //   return dateA - dateB; // Sort in descending order (latest date first)
+  // });
   const transformCompetitionData = (data) => {
     return data.participants.map((competition) => ({
       Roll_No: competition.rollNo,
       Name: competition.name,
       Hostel: competition.hostelNo,
+      // Add any other competition-specific properties here
+    }));
+  };
+  const transformFinalResultsNoPart = (data) => {
+    return data.participants.map((competition) => ({
+      Position:  <span>{ competition.Position}<sup>{getOrdinal( competition.Position)}</sup></span>,
+      Hostel: competition.hostelNo,
+      Points:competition.Points,
       // Add any other competition-specific properties here
     }));
   };
@@ -213,6 +168,31 @@ const ClientDetails = () => {
       // Add any other competition-specific properties here
     }));
   };
+  const transformIndPerformance = (data) => {
+    return data.participants.map((p) => ({
+      Position:<span>{p.Position}<sup>{getOrdinal(p.Position)}</sup></span>,
+      Name:p.name,
+      Hostel: p.hostelNo,
+      // Add any other competition-specific properties here
+    }));
+  };
+  const transformGroupPerformance = (data) => {
+    return data.participants.map((p) => ({
+      Position:<span>{p.Position}<sup>{getOrdinal(p.Position)}</sup></span>,
+      Hostel: p.hostelNo,
+      // Add any other competition-specific properties here
+    }));
+  };
+  function getOrdinal(number) {
+    if (number % 10 === 1 && number % 100 !== 11) {
+      return  "st";
+    } else if (number % 10 === 2 && number % 100 !== 12) {
+      return  "nd";
+    } else if (number % 10 === 3 && number % 100 !== 13) {
+      return "rd";
+    }
+    return  "th";
+  }
 
 
   return (
@@ -226,12 +206,19 @@ const ClientDetails = () => {
           </a>
           </div>
         </Link>
+        <input
+          className="search__input"
+					type="text"
+					placeholder="Search... "
+					onChange={handleSearch}
+					value={search}
+				/>
 
       </div>
     </header>
     <h2 className='title_2'>Total GC Points</h2>
-      <div className="blank">
-        <BarGraph chartData={barChartData} options={options}  />
+      <div className='blank'>
+        <BarGraph className="barGraph_1" chartData={barChartData} options={options}  />
       </div>
       <div className='back_photo'>
       <main>
@@ -256,125 +243,179 @@ const ClientDetails = () => {
         </table>
       </div>
         </main>
-
-      
         <div className="title_" style={{marginTop:"100px"}}>
           <h2>GC Blog</h2>
           
         </div>
         <div className="back_photo">
-  {mergedData
+        {mergedData
 
-  .reverse() 
-  .map((item, index) => {
-    if (item.Type === 'event') {
-      // Render HTML for events
-      return (
-        <div key={index} className="card_">
+.reverse() 
+.map((item, index) => {
+  if (item.Type === 'event') {
+    // Render HTML for events
+    return (
+      <div key={index} className="card_">
+        <div>
+        <div className="header">
+          <span className="icon">
+            <svg fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+              <path
+                clipRule="evenodd"
+                d="M18 3a1 1 0 00-1.447-.894L8.763 6H5a3 3 0 000 6h.28l1.771 5.316A1 1 0 008 18h1a1 1 0 001-1v-4.382l6.553 3.276A1 1 0 0018 15V3z"
+                fillRule="evenodd"
+              ></path>
+            </svg>
+          </span>
           <div>
-          <div className="header">
-            <span className="icon">
-              <svg fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                <path
-                  clipRule="evenodd"
-                  d="M18 3a1 1 0 00-1.447-.894L8.763 6H5a3 3 0 000 6h.28l1.771 5.316A1 1 0 008 18h1a1 1 0 001-1v-4.382l6.553 3.276A1 1 0 0018 15V3z"
-                  fillRule="evenodd"
-                ></path>
-              </svg>
-            </span>
-            <div>
-          <p className="alert">{item.GC}</p>
-            </div>
-          
+        <p className="alert">{item.GC}</p>
           </div>
-          
-          <div>
-          
-            <p className="message">Date: {item.Date}</p>
-            <p className="message">Venue: {item.Venue}</p>
-            <p className='message'>Contact your Hostel cult Cos to participate </p>
-            <p className="message"> {item.Secy}</p>
-          </div>
-          </div>
-          <div className='gc_post'>
-          <img src={item.img} className='post'></img>
+        
         </div>
-          
+        
+        <div>
+        
+          <p className="message">Date: {item.Date}</p>
+          <p className="message">Venue: {item.Venue}</p>
+          <p className='message'>Contact your Hostel cult Cos to participate </p>
+          <p className="message"> {item.Secy}</p>
         </div>
-      );
-    } else if (item.Type === 'GCparticipants') {
-      // Render HTML for competitions
-      return (
-        <div key={index} className="card_part">
-          <div className="header_part">
-            <span className='icon' style={{color:'#F2EAD3'}}><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-lines-fill" viewBox="0 0 16 16">
-  <path d="M6 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm-5 6s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H1zM11 3.5a.5.5 0 0 1 .5-.5h4a.5.5 0 0 1 0 1h-4a.5.5 0 0 1-.5-.5zm.5 2.5a.5.5 0 0 0 0 1h4a.5.5 0 0 0 0-1h-4zm2 3a.5.5 0 0 0 0 1h2a.5.5 0 0 0 0-1h-2zm0 3a.5.5 0 0 0 0 1h2a.5.5 0 0 0 0-1h-2z"/>
-</svg></span>
-            <p className="alert">{item.name} Participants</p>
-          </div>
-          {/* Render participants table */}
-          <Table data={transformCompetitionData(item)} columns={hostelcultColumns} pageLimit={hostelPageLimit} style={{fontSize:"7px"}}/>
         </div>
-      );
-    }
-    else if (item.Type === 'GCFinalResults') {
-      // Render HTML for competitions
-      return (
-        <div key={index} className="card_part">
-          <div className="header_part">
-            <span className='icon' style={{color:"yellow"}}><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trophy-fill" viewBox="0 0 16 16">
-  <path d="M2.5.5A.5.5 0 0 1 3 0h10a.5.5 0 0 1 .5.5c0 .538-.012 1.05-.034 1.536a3 3 0 1 1-1.133 5.89c-.79 1.865-1.878 2.777-2.833 3.011v2.173l1.425.356c.194.048.377.135.537.255L13.3 15.1a.5.5 0 0 1-.3.9H3a.5.5 0 0 1-.3-.9l1.838-1.379c.16-.12.343-.207.537-.255L6.5 13.11v-2.173c-.955-.234-2.043-1.146-2.833-3.012a3 3 0 1 1-1.132-5.89A33.076 33.076 0 0 1 2.5.5zm.099 2.54a2 2 0 0 0 .72 3.935c-.333-1.05-.588-2.346-.72-3.935zm10.083 3.935a2 2 0 0 0 .72-3.935c-.133 1.59-.388 2.885-.72 3.935z"/>
-</svg></span>
-            <p className="alert">{item.name} Final Results</p>
-          </div>
-          {/* Render participants table */}
-          <Table data={transformFinalResults(item)} columns={FinalResultColumns} pageLimit={hostelPageLimit} />
-        </div>
-      );
-    }
-    else if(item.Type==="GCgroupparticipants"){
-      const linkStyle = {
-        maxWidth: "100%",     // Limit the width to 100% of its container
-        whiteSpace: "overflow", // Prevent text from wrapping 
-        textOverflow: "ellipsis" // Show ellipsis (...) for text that overflows
-      };
-    
-      return (
-        <div key={index} className="card_part">
-          <div className="header_part">
+        <div className='gc_post'>
+        <img src={item.img} className='post'></img>
+      </div>
+        
+      </div>
+    );
+  } else if (item.Type === 'GCparticipants') {
+    // Render HTML for competitions
+    return (
+      <div key={index} className="card_part">
+        <div className="header_part">
           <span className='icon' style={{color:'#F2EAD3'}}><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-lines-fill" viewBox="0 0 16 16">
-  <path d="M6 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm-5 6s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H1zM11 3.5a.5.5 0 0 1 .5-.5h4a.5.5 0 0 1 0 1h-4a.5.5 0 0 1-.5-.5zm.5 2.5a.5.5 0 0 0 0 1h4a.5.5 0 0 0 0-1h-4zm2 3a.5.5 0 0 0 0 1h2a.5.5 0 0 0 0-1h-2zm0 3a.5.5 0 0 0 0 1h2a.5.5 0 0 0 0-1h-2z"/>
+<path d="M6 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm-5 6s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H1zM11 3.5a.5.5 0 0 1 .5-.5h4a.5.5 0 0 1 0 1h-4a.5.5 0 0 1-.5-.5zm.5 2.5a.5.5 0 0 0 0 1h4a.5.5 0 0 0 0-1h-4zm2 3a.5.5 0 0 0 0 1h2a.5.5 0 0 0 0-1h-2zm0 3a.5.5 0 0 0 0 1h2a.5.5 0 0 0 0-1h-2z"/>
 </svg></span>
-            <p className="alert">{item.name} Participants</p>
-          </div>
-          <p   style={{width:"100%",fontSize:"15px",marginLeft:"2%"}}>Link of Participants list : <a target= "_blank" className="message_">click here</a></p>
-          
+          <p className="alert">{item.name} Participants</p>
         </div>
-      )
-    }
-    else if(item.Type==="GCGroupResult"){
-      const linkStyle = {
-        maxWidth: "100%",     // Limit the width to 100% of its container
-        whiteSpace: "overflow", // Prevent text from wrapping 
-        textOverflow: "ellipsis" // Show ellipsis (...) for text that overflows
-      };
-    
-      return (
-        <div key={index} className="card_part">
-          <div className="header_part">
+        {/* Render participants table */}
+        <div className='GCtable_'>
+        <Table  data={transformCompetitionData(item)} columns={hostelcultColumns} pageLimit={hostelPageLimit} style={{fontSize:"7px"}}/>
+        </div>
+      </div>
+    );
+  }
+  else if (item.Type === 'GCFinalResults') {
+    // Render HTML for competitions
+    return (
+      <div key={index} className="card_part">
+        <div className="header_part">
           <span className='icon' style={{color:"yellow"}}><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trophy-fill" viewBox="0 0 16 16">
-  <path d="M2.5.5A.5.5 0 0 1 3 0h10a.5.5 0 0 1 .5.5c0 .538-.012 1.05-.034 1.536a3 3 0 1 1-1.133 5.89c-.79 1.865-1.878 2.777-2.833 3.011v2.173l1.425.356c.194.048.377.135.537.255L13.3 15.1a.5.5 0 0 1-.3.9H3a.5.5 0 0 1-.3-.9l1.838-1.379c.16-.12.343-.207.537-.255L6.5 13.11v-2.173c-.955-.234-2.043-1.146-2.833-3.012a3 3 0 1 1-1.132-5.89A33.076 33.076 0 0 1 2.5.5zm.099 2.54a2 2 0 0 0 .72 3.935c-.333-1.05-.588-2.346-.72-3.935zm10.083 3.935a2 2 0 0 0 .72-3.935c-.133 1.59-.388 2.885-.72 3.935z"/>
+<path d="M2.5.5A.5.5 0 0 1 3 0h10a.5.5 0 0 1 .5.5c0 .538-.012 1.05-.034 1.536a3 3 0 1 1-1.133 5.89c-.79 1.865-1.878 2.777-2.833 3.011v2.173l1.425.356c.194.048.377.135.537.255L13.3 15.1a.5.5 0 0 1-.3.9H3a.5.5 0 0 1-.3-.9l1.838-1.379c.16-.12.343-.207.537-.255L6.5 13.11v-2.173c-.955-.234-2.043-1.146-2.833-3.012a3 3 0 1 1-1.132-5.89A33.076 33.076 0 0 1 2.5.5zm.099 2.54a2 2 0 0 0 .72 3.935c-.333-1.05-.588-2.346-.72-3.935zm10.083 3.935a2 2 0 0 0 .72-3.935c-.133 1.59-.388 2.885-.72 3.935z"/>
 </svg></span>
-            <p className="alert">{item.name} Final Result</p>
-          </div>
-          <p   style={{width:"100%",fontSize:"15px",marginLeft:"2%"}}>Link of Results : <a target= "_blank" className="message_">click here</a></p>
-          
+          <p className="alert">{item.name} Final Results</p>
         </div>
-      )
-    }
-    return null; // Handle other types or data that doesn't match 'event' or 'competition'
-  })}
-</div>
+        {/* Render participants table */}
+        <div className='GCtable_'>
+
+        <Table  data={transformFinalResults(item)} columns={FinalResultColumns} pageLimit={hostelPageLimit} />
+        </div>
+      </div>
+    );
+  }
+  else if (item.Type === 'GCFinalResultsnoparticipants') {
+    // Render HTML for competitions
+    return (
+      <div key={index} className="card_part">
+        <div className="header_part">
+          <span className='icon' style={{color:"yellow"}}><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trophy-fill" viewBox="0 0 16 16">
+<path d="M2.5.5A.5.5 0 0 1 3 0h10a.5.5 0 0 1 .5.5c0 .538-.012 1.05-.034 1.536a3 3 0 1 1-1.133 5.89c-.79 1.865-1.878 2.777-2.833 3.011v2.173l1.425.356c.194.048.377.135.537.255L13.3 15.1a.5.5 0 0 1-.3.9H3a.5.5 0 0 1-.3-.9l1.838-1.379c.16-.12.343-.207.537-.255L6.5 13.11v-2.173c-.955-.234-2.043-1.146-2.833-3.012a3 3 0 1 1-1.132-5.89A33.076 33.076 0 0 1 2.5.5zm.099 2.54a2 2 0 0 0 .72 3.935c-.333-1.05-.588-2.346-.72-3.935zm10.083 3.935a2 2 0 0 0 .72-3.935c-.133 1.59-.388 2.885-.72 3.935z"/>
+</svg></span>
+          <p className="alert">{item.name} Final Results</p>
+        </div>
+        {/* Render participants table */}
+        <div className='GCtable_'>
+        <Table  data={transformFinalResultsNoPart(item)} columns={FinalResultNoPartColumns} pageLimit={hostelPageLimit} />
+        </div>
+      </div>
+    );
+  }
+  else if (item.Type === 'GCPerformance') {
+    // Render HTML for competitions
+    return (
+      <div key={index} className="card_part">
+        <div className="header_part">
+          <span className='icon' style={{color:"yellow"}}><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trophy-fill" viewBox="0 0 16 16">
+<path d="M2.5.5A.5.5 0 0 1 3 0h10a.5.5 0 0 1 .5.5c0 .538-.012 1.05-.034 1.536a3 3 0 1 1-1.133 5.89c-.79 1.865-1.878 2.777-2.833 3.011v2.173l1.425.356c.194.048.377.135.537.255L13.3 15.1a.5.5 0 0 1-.3.9H3a.5.5 0 0 1-.3-.9l1.838-1.379c.16-.12.343-.207.537-.255L6.5 13.11v-2.173c-.955-.234-2.043-1.146-2.833-3.012a3 3 0 1 1-1.132-5.89A33.076 33.076 0 0 1 2.5.5zm.099 2.54a2 2 0 0 0 .72 3.935c-.333-1.05-.588-2.346-.72-3.935zm10.083 3.935a2 2 0 0 0 .72-3.935c-.133 1.59-.388 2.885-.72 3.935z"/>
+</svg></span>
+          <p className="alert">{item.name} Performance Rankings</p>
+        </div>
+        {/* Render participants table */}
+        <div className='GCtable_'>
+        <Table data={transformIndPerformance(item)} columns={IndPerformanceRankings} pageLimit={hostelPageLimit} />
+        </div>
+      </div>
+    );
+  }
+  else if (item.Type === 'GroupGCPerformance') {
+    // Render HTML for competitions
+    return (
+      <div key={index} className="card_part">
+        <div className="header_part">
+          <span className='icon' style={{color:"yellow"}}><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trophy-fill" viewBox="0 0 16 16">
+<path d="M2.5.5A.5.5 0 0 1 3 0h10a.5.5 0 0 1 .5.5c0 .538-.012 1.05-.034 1.536a3 3 0 1 1-1.133 5.89c-.79 1.865-1.878 2.777-2.833 3.011v2.173l1.425.356c.194.048.377.135.537.255L13.3 15.1a.5.5 0 0 1-.3.9H3a.5.5 0 0 1-.3-.9l1.838-1.379c.16-.12.343-.207.537-.255L6.5 13.11v-2.173c-.955-.234-2.043-1.146-2.833-3.012a3 3 0 1 1-1.132-5.89A33.076 33.076 0 0 1 2.5.5zm.099 2.54a2 2 0 0 0 .72 3.935c-.333-1.05-.588-2.346-.72-3.935zm10.083 3.935a2 2 0 0 0 .72-3.935c-.133 1.59-.388 2.885-.72 3.935z"/>
+</svg></span>
+          <p className="alert">{item.name} Performance Rankings</p>
+        </div>
+        {/* Render participants table */}
+        <div className='GCtable_'>
+        <Table data={transformGroupPerformance(item)} columns={GroupPerformanceRankings} pageLimit={hostelPageLimit} />
+        </div>
+      </div>
+    );
+  }
+  else if(item.Type==="GCgroupparticipants"){
+    const linkStyle = {
+      maxWidth: "100%",     // Limit the width to 100% of its container
+      whiteSpace: "overflow", // Prevent text from wrapping 
+      textOverflow: "ellipsis" // Show ellipsis (...) for text that overflows
+    };
+  
+    return (
+      <div key={index} className="card_part">
+        <div className="header_part">
+        <span className='icon' style={{color:'#F2EAD3'}}><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-lines-fill" viewBox="0 0 16 16">
+<path d="M6 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm-5 6s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H1zM11 3.5a.5.5 0 0 1 .5-.5h4a.5.5 0 0 1 0 1h-4a.5.5 0 0 1-.5-.5zm.5 2.5a.5.5 0 0 0 0 1h4a.5.5 0 0 0 0-1h-4zm2 3a.5.5 0 0 0 0 1h2a.5.5 0 0 0 0-1h-2zm0 3a.5.5 0 0 0 0 1h2a.5.5 0 0 0 0-1h-2z"/>
+</svg></span>
+          <p className="alert">{item.name} Participants</p>
+        </div>
+        <p   style={{width:"100%",fontSize:"15px",marginLeft:"2%"}}>Link of Participants list : <a target= "_blank" className="message_">click here</a></p>
+        
+      </div>
+    )
+  }
+  else if(item.Type==="GCGroupResult"){
+    const linkStyle = {
+      maxWidth: "100%",     // Limit the width to 100% of its container
+      whiteSpace: "overflow", // Prevent text from wrapping 
+      textOverflow: "ellipsis" // Show ellipsis (...) for text that overflows
+    };
+  
+    return (
+      <div key={index} className="card_part">
+        <div className="header_part">
+        <span className='icon' style={{color:"yellow"}}><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trophy-fill" viewBox="0 0 16 16">
+<path d="M2.5.5A.5.5 0 0 1 3 0h10a.5.5 0 0 1 .5.5c0 .538-.012 1.05-.034 1.536a3 3 0 1 1-1.133 5.89c-.79 1.865-1.878 2.777-2.833 3.011v2.173l1.425.356c.194.048.377.135.537.255L13.3 15.1a.5.5 0 0 1-.3.9H3a.5.5 0 0 1-.3-.9l1.838-1.379c.16-.12.343-.207.537-.255L6.5 13.11v-2.173c-.955-.234-2.043-1.146-2.833-3.012a3 3 0 1 1-1.132-5.89A33.076 33.076 0 0 1 2.5.5zm.099 2.54a2 2 0 0 0 .72 3.935c-.333-1.05-.588-2.346-.72-3.935zm10.083 3.935a2 2 0 0 0 .72-3.935c-.133 1.59-.388 2.885-.72 3.935z"/>
+</svg></span>
+          <p className="alert">{item.name} Final Result</p>
+        </div>
+        <p   style={{width:"100%",fontSize:"15px",marginLeft:"2%"}}>Link of Results : <a target= "_blank" className="message_">click here</a></p>
+        
+      </div>
+    )
+  }
+  return null; // Handle other types or data that doesn't match 'event' or 'competition'
+})}
+        </div>
       </div>
     </div>
   );

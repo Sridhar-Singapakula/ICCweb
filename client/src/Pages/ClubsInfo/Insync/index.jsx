@@ -1,4 +1,5 @@
 import React from 'react';
+import { useState,useEffect } from 'react';
 import TimelineComponent from '../../../components/Timeline';
 import Navbar from "../../../components/Navbar"
 // import roots from "../../../img/images/roots.png";
@@ -6,119 +7,295 @@ import "./style.css";
 import gsec from "../../../img/images/gsec.jpg";
 import ICClogo from "../../../img/images/ICClogo.png";
 import pngi from "../../../img/images/pngi.png";
+import dance from "../../../img/images/InSyncClub.png";
+import events1 from "../../../img/images/dance_2.jpg";
+import events2 from "../../../img/images/dance_3.webp";
+import events3 from "../../../img/images/dance_1.jpg";
+import Web from "../../../img/images/Sridhar.jpg";
+import Aditi from "../../../img/images/Aidti.jfif";
+
+import Slider from 'react-slick';
+import 'slick-carousel/slick/slick.css';
+import 'slick-carousel/slick/slick-theme.css';
+import 'aos/dist/aos.css';
+import AOS from 'aos';
 const Insync = () => {
-  const eventsData = [
-    {
-      date: 'May 21',
-      time: '7:45 PM',
-      color: 'fb',
-      icon: 'fa fa-map-marker',
-      eventName: 'Virasat',
-      description:
-        ' the 2 day ICFA flagship, LT PCSA turns into a royal Darbar as divine music wafts through the air and the spectacles of dance rival even those of celestial nymphs.',
-      tags: ['Design', 'Admin'],
-    },
-    {
-        date: 'May 21',
-        time: '7:45 PM',
-        color: 'fb',
-        icon: 'fa fa-map-marker',
-        eventName: 'Dharohar',
-        description:
-          'the ICFA Night, where students get an opportunity to learn and perform in front of a filled auditorium of campus residents.',
-        tags: ['Design', 'Admin'],
-      },
-      {
-        date: 'May 21',
-        time: '7:45 PM',
-        color: 'fb',
-        icon: 'fa fa-map-marker',
-        eventName: 'General Championships',
-        description:
-          ' To add to the quality of this culture, Roots hosts the Duet Classical Music GC, which is a zealous clash between the best of classical singers and instrumentalists from each hostel.',
-        tags: ['Design', 'Admin'],
-      },
-      {
-        date: 'May 21',
-        time: '7:45 PM',
-        color: 'fb',
-        icon: 'fa fa-map-marker',
-        eventName: 'Dandiya Night',
-        description:
-          'the most colourful and exotic night you will get to see in insti!',
-        tags: ['Design', 'Admin'],
-      }
-    // Add more events here...
-  ];
+  const [showAdditionalEvents, setShowAdditionalEvents] = useState(false);
+  
+  const handleLoadMore = () => {
+    setShowAdditionalEvents(!showAdditionalEvents);
+  };
+  const settings = {
+    dots: true,
+    autoplay: true,
+    slidesToShow: 2,
+    slidesToScroll: 1,
+    autoplaySpeed: 4000,// Use afterChange to trigger handleActive after the slide changes
+  };
+  useEffect(() => {
+    AOS.init();
+  }, []);
 
   return (
     <div>
         <Navbar/>
-
-        <div className="section-title" style={{marginTop:"100px",marginBottom:"-50px"}}>
-          <h2>Roots Club</h2>
+        <div className='cover_img'>
+          <h1 className='cover_h4'>
+            Insync
+          </h1>
+        </div>
+        <div className='ind_div'>
+          <div className='ind_head'>
+            <h4 className='ind_head_h4'>
+              The Dance Club of IITB
+            </h4>
+            <p className='ind_head_p'>
+Explore the rich tapestry of creativity and talent<br/> of IIT Bombay as we present a spectacular<br/> showcase of cultural events and performances.
+            </p>
+            <section className="secy">
+      <div className="secy-divs">
+        <div className="secy-div">
+          <img src={Web} className=""></img>
         </div>
         <div>
-        <ul className='ul_'>
-          <li className='li_'>
-            <a href="/vaani">
-             <i className="bi bi-linkedin" aria-hidden="true"></i>
-              <span> - @roots_iitb</span>
-            </a>
-          </li>
-          <li className='li_'>
-            <a href="#">
-              <i className="bi bi-twitter" aria-hidden="true"></i>
-              <span> - @roots_iitb</span>
-            </a>
-          </li>
-          <li className='li_'>
-            <a href="#">
-              <i className="bi bi-instagram" aria-hidden="true"></i>
-              <span> - @roots_iitb</span>
-            </a>
-          </li>
-          </ul>
-        </div>
-      <section id="why-us" className="why-us section-bg">
-      <div className="container-fluid" data-aos="fade-up">
-        <div className="row">
-        <div className="col-lg-4 align-items-stretch order-1 order-lg-2 img"  data-aos="zoom-in" data-aos-delay="150">
-            <img src={pngi} className="image_back"></img>
+          <h4 className='about_us_h4'>Sridhar Singapakula</h4>
+          <p>Institute Web Nominee</p>
+          <div className="links">
+          <a href="#" className="linkedin"><i className="bi bi-linkedin"></i></a>
+          <a href="#" className="email"><i className="bi bi-envelope"></i></a>
+          <a href="#" className="instagram"><i className="bi bi-instagram"></i></a>
+          
           </div>
-          <div className="col-lg-7 d-flex flex-column justify-content-center align-items-stretch order-2 order-lg-1" style={{alignItems:"start"}}>
-            <div className="content">
-              <h3 style={{fontSize:"30px",}} ><strong>Institute Classical and folk Arts Club</strong></h3>
-              <p>
-               Lorem ipsum, dolor sit amet consectetur adipisicing elit. Sed aliquam hic deleniti, nostrum, adipisci natus unde exercitationem nulla at placeat esse repellat molestias atque veritatis officiis voluptatibus vitae maiores consectetur adipisicing elit. Sed aliquam hic deleniti, nostrum, adipisci natus unde exercitationem nulla at
-              </p>
+        </div>
+      </div>
+     
+    </section>
+          </div>
+          <div className='ind_img'>
+            <img src={dance}></img>
+          </div>
+        </div>
+        <div className='events_'>
+          <h4 className='about_us_h4 text-center' >Events</h4>
+          <div className='events_divs'>
+          <div className='events_div'>
+            <div>
+              <img src={events1}></img>
             </div>
-            <div className='content'>
-              <div>
-              <img className='image_' src={gsec} alt=""></img></div>  
-              <div >
-                <h3 style={{fontSize:"24px",marginTop:"15px"}}>
-                    Pranali 
-                </h3>
-                <p style={{fontSize:"18px",color:"grey"}}>
-                Institute Classical and folk Arts Club Secretary
+            <div className='events_1_div'>
+              <div style={{textAlign:"center"}}>
+                <h4 className='h4_'>APR <br/> <span style={{fontSize:"25px",fontWeight:"700",color:"black"}}>14</span></h4>
+              </div>
+              <div className='events_desc'>
+                <h4>
+                  Event name
+                </h4>
+                <h4>
+                  Venue
+                </h4>
+                <p>
+                  Description about the event
                 </p>
-                <div className="social-links mt-3">
-                <a href="#" className="twitter"><i className="bi bi-twitter" style={{fontSize:"25px",color:"lightblue"}}></i></a>
-                <a href="#" className="facebook"><i className="bi bi-facebook" style={{fontSize:"25px",color:"lightblue",marginLeft:"5px"}}></i></a>
-                <a href="#" className="instagram"><i className="bi bi-instagram" style={{fontSize:"25px",color:"lightblue",marginLeft:"5px"}}></i></a>
-                <a href="#" className="linkedin"><i className="bi bi-linkedin" style={{fontSize:"25px",color:"lightblue",marginLeft:"5px"}}></i></a>
               </div>
+            </div>
+          </div>
+          <div className='events_div'>
+            <div>
+              <img src={events2}></img>
+            </div>
+            <div className='events_1_div'>
+              <div style={{textAlign:"center"}}>
+                <h4 className='h4_'>APR <br/> <span style={{fontSize:"25px",fontWeight:"700",color:"black"}}>14</span></h4>
               </div>
-              
+              <div className='events_desc'>
+                <h4>
+                  Event name
+                </h4>
+                <h4>
+                  Venue
+                </h4>
+                <p>
+                  Description about the event
+                </p>
+              </div>
+            </div>
+          </div>
+          <div className='events_div'>
+            <div>
+              <img src={events1}></img>
+            </div>
+            <div className='events_1_div'>
+              <div style={{textAlign:"center"}}>
+                <h4 className='h4_'>APR <br/> <span style={{fontSize:"25px",fontWeight:"700",color:"black"}}>14</span></h4>
+              </div>
+              <div className='events_desc'>
+                <h4>
+                  Event name
+                </h4>
+                <h4>
+                  Venue
+                </h4>
+                <p>
+                  Description about the event
+                </p>
+              </div>
+            </div>
+          </div>
+          {showAdditionalEvents &&
+          <>
+          <div className='events_div'>
+            <div>
+              <img src={events3}></img>
+            </div>
+            <div className='events_1_div'>
+              <div style={{textAlign:"center"}}>
+                <h4 className='h4_'>APR <br/> <span style={{fontSize:"25px",fontWeight:"700",color:"black"}}>14</span></h4>
+              </div>
+              <div className='events_desc'>
+                <h4>
+                  Event name
+                </h4>
+                <h4>
+                  Venue
+                </h4>
+                <p>
+                  Description about the event
+                </p>
+              </div>
+            </div>
+          </div>
+          <div className='events_div'>
+            <div>
+              <img src={events3}></img>
+            </div>
+            <div className='events_1_div'>
+              <div style={{textAlign:"center"}}>
+                <h4 className='h4_'>APR <br/> <span style={{fontSize:"25px",fontWeight:"700",color:"black"}}>14</span></h4>
+              </div>
+              <div className='events_desc'>
+                <h4>
+                  Event name
+                </h4>
+                <h4>
+                  Venue
+                </h4>
+                <p>
+                  Description about the event
+                </p>
+              </div>
+            </div>
+          </div>
+          </>
+          }
+        </div>
+        <div className='text-center'>
+          <button className="button-34 text-center" onClick={handleLoadMore}>Load More</button>
+        </div>
+        <div className='achievements'>
+          <h4 className='about_us_h4 text-center'>Achievements</h4>
+          <div className='achieve_divs'>
+            <div>
+              <img src={events1} className='carousel_img'></img>
+              <h4 className='position text-center'>1st Position</h4>
+              <p className='text-center'>Description</p>
+            </div>
+            <div>
+            <img src={events2} className='carousel_img c1'></img>
+            <h4 className='position text-center'>1st Position</h4>
+              <p className='text-center'>Description</p>
+            </div>
+            <div>
+            <img src={events3} className='carousel_img'></img>
+            <h4 className='position text-center'>1st Position</h4>
+              <p className='text-center'>Description</p>
             </div>
           </div>
         </div>
       </div>
-    </section>
-    <h1 style={{fontSize:"30px",fontStyle:"bolder",textAlign:"center"}}><strong>Events</strong></h1>
-      <TimelineComponent events={eventsData} />
-      <footer  className="footer">
+      <div className='gallery_divs'>
+        <h4 className='about_us_h4 text-center '>Photo Gallery</h4>
+        <Slider {...settings}>
+          <div className='gallery_'>
+            <img src={events1} ></img>
+          </div>
+          <div className='gallery_'>
+            <img src={events2}></img>
+          </div>
+          <div className='gallery_'>
+            <img src={events3}></img>
+          </div>
+        </Slider>
+      </div>
+      <div className='events_'>
+          <h4 className='about_us_h4 text-center' style={{marginBottom:"50px"}}>Events</h4>
+          <div className='events_divs'>
+          <div className='events_div'>
+            <div>
+              <img src={events1}></img>
+            </div>
+            <div className='events_1_div'>
+              <div style={{textAlign:"center"}}>
+                <h4 className='h4_'>APR <br/> <span style={{fontSize:"25px",fontWeight:"700",color:"black"}}>14</span></h4>
+              </div>
+              <div className='events_desc'>
+                <h4>
+                  Event name
+                </h4>
+                <h4>
+                  Venue
+                </h4>
+                <p>
+                  Description about the event
+                </p>
+              </div>
+            </div>
+          </div>
+          <div className='events_div'>
+            <div>
+              <img src={events2}></img>
+            </div>
+            <div className='events_1_div'>
+              <div style={{textAlign:"center"}}>
+                <h4 className='h4_'>APR <br/> <span style={{fontSize:"25px",fontWeight:"700",color:"black"}}>14</span></h4>
+              </div>
+              <div className='events_desc'>
+                <h4>
+                  Event name
+                </h4>
+                <h4>
+                  Venue
+                </h4>
+                <p>
+                  Description about the event
+                </p>
+              </div>
+            </div>
+            
+          </div>
+          <div className='events_div'>
+            <div>
+              <img src={events1}></img>
+            </div>
+            <div className='events_1_div'>
+              <div style={{textAlign:"center"}}>
+                <h4 className='h4_'>APR <br/> <span style={{fontSize:"25px",fontWeight:"700",color:"black"}}>14</span></h4>
+              </div>
+              <div className='events_desc'>
+                <h4>
+                  Event name
+                </h4>
+                <h4>
+                  Venue
+                </h4>
+                <p>
+                  Description about the event
+                </p>
+              </div>
+            </div>
+          </div>
+          </div>
+          </div>
+          <footer id="footer2" className="footer">
       
 
       <div className="footer-top">
@@ -140,8 +317,8 @@ const Insync = () => {
 
             
             <div className="col-lg-3 col-md-12 footer-contact text-center text-md-start">
-              <h4>Contact Us</h4>
-              <p>
+              <h4 className="about_us_h4">Contact Us</h4>
+              <p className="about_us_p" style={{color:"grey"}}>
                 Old SAC <br />
                 IIT Bombay<br />
                 Mumbai,India <br /><br />

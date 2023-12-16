@@ -1,0 +1,49 @@
+.carousel-container {
+    position: relative;
+    width: 100%;
+  }
+  
+  .carousel {
+    display: flex;
+    overflow: hidden;
+  }
+  .carousel img{
+    width:380px;
+    height:480px;
+    object-fit: cover;
+    border-radius: 15px;
+  }
+  
+  .carousel-item {
+    flex: 0 0 100%;
+    transition: transform 0.5s ease-in-out;
+  }
+  
+  .active-image {
+    width: 150%; /* Increase the size of the active image */
+  }
+  
+  .dot-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 10px;
+  }
+  
+  .dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background-color: #bbb;
+    margin: 0 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease-in-out;
+  }
+  
+  .active-dot {
+    background-color: #333;
+    transform: scale(1.5); /* Scale up the active dot */
+  }
+  
+  /* Add other styling as needed */
+  
+  
